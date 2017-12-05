@@ -1,0 +1,156 @@
+lexicon.trans 2\newline
+\# T R IY \#\newline
+\# V EY DD \#\newline
+\# AE KD \#\newline
+\# K AXR \#\newline
+\# B AXR AX L AE KD T R EY DX IX F AX S T R IX S AXR \#\newline
+\# HH AY T N \#\newline
+\# V EH P AO R DD \#\newline
+\# HH AW N AA IY M N Z \#\newline
+\# CH AXR \#\newline
+\# B OW L \#\newline
+\# W IH R DX IX NG \#\newline
+\# D EH L EH N B AH T R AX N D IH S SH F AO R AY KD \#\newline
+\# R T AA B S EH N IY \#\newline
+\# AX \#\newline
+\# TH AXR B IX K IH L \#\newline
+\# M AX N D UW M P EH R IH N \#\newline
+\# IH DX IX NG \#\newline
+\# S K AX L \#\newline
+\# HH UW G AE K IY \#\newline
+\# M \#\newline
+\# S AE L \#\newline
+\# D L AA R AY N TD B UH TD \#\newline
+\# S AX N \#\newline
+\# W IX NG Z AA JH \#\newline
+\# Y AX V AY AE K ER F AE S KD \#\newline
+lexicon.trans 3 \newline
+\# AX SH ER Z AX KD \#\newline
+\# IX SH \#\newline
+\# IX SH \#\newline
+\# B OW SH AX N OW SH AX N OW SH AX PD TD L AX T OW SH AX PD \#\newline
+\# HH OW SH AX PD TD L AX SH ER Z AX KD TD L AX SH ER Z AX KD TD L EH GD \#\newline
+\# N OW SH AX \#\newline
+\# M OW SH AX PD TD L IY OW EH DD TH ER Z AX KD TD L \#\newline
+\# CH ER TD L AE GD T AE R AX OW K EY OW V ER L Y AX L OW SH AX N Z OW Z D AX SH ER Z AX KD TD L AXR OW K OW UH R AX OW K OW UH R OW R AY OW D Z EY N OW SH AX N OW SH AX N OW SH AX L OW SH AX N OW SH AX N OW SH AX N TD P OW SH AX PD TD L IY B OW SH AX N TD P OW SH AX PD TD L IY OW EH DD TH ER Z AX KD TD L AX SH ER Z AX KD TD L AXR OW K Y ER K AX SH ER Z AX KD TD L AO R AX OW K OW UH R OW R AY OW D Z EY N OW SH AX N OW SH AX N OW SH AX N OW SH AX PD TD L AX SH ER Z AX KD \#\newline
+\# R Y AX EH N OW SH AX N OW SH AX PD TD L \#\newline
+\# Y ER K S OW SH AX N Z OW Z D AX SH ER Z AX KD TD L AX SH ER Z AX KD TD L AX SH ER Z AX M OW SH AX N Z OW Z D AX SH ER Z AX KD TD \#\newline
+\# L ER K AX SH ER Z AX KD TD L IY OW EH DD TH ER Z AX KD TD L AO R T OW SH AX PD \#\newline
+\# S OW SH AX PD TD L AX JH ER Z AX KD \#\newline
+\# B AA SH \#\newline
+\# S OW SH AX \#\newline
+\# W ER KD D ER TD L IY OW EH DD TH ER Z AX KD TD L AY SH AW TD P OW SH AX N OW SH AX N OW SH AX PD TD L IY OW EH DD TH ER Z AX M OW SH AX PD \#\newline
+\# P OW SH AX N Z OW Z D AX SH ER Z AX TD W AO PD \#\newline
+\# EY OW V ER L Y AX EH N OW SH AX PD TD L IY OW EH DD TH ER Z AX N OW SH AX N OW SH AX PD TD L IY OW EH DD TH ER Z AX M OW SH AX PD \#\newline
+\# Y ER K AX L OW SH IY OW EH DD TH ER Z \#\newline
+\# S OW SH AX N OW SH AX N OW SH AX N OW SH AX PD \#\newline
+\# P OW SH AX N OW SH AX PD TD L IY OW EH DD TH ER Z AX KD TD L AX SH ER Z AX KD TD L AX SH ER Z AX KD TD L AXR OW K OW UH R OW R AY OW D Z EY N OW SH AX N OW SH AX N OW SH AX N DD \#\newline
+\# L ER K AX SH ER Z AX B OW SH AX N OW SH AX N IH GD T AE R AX OW K OW UH R OW R AY OW D Z EY N OW SH AX N OW SH AX PD TD L IY OW EH DD TH ER Z AX KD TD L AX SH ER Z AX KD \#\newline
+\# AE GD T AE R AX OW K OW UH R OW R AY OW D Z EY N OW SH AX L OW SH AX N OW SH AX L OW K OW UH R AX OW K OW UH R IX \#\newline
+\# W ER SH AX B OW SH AX PD TD L AX SH ER Z AX KD TD L IX R K OW UH R AX OW K OW UH R AX OW K OW UH R OW R AY OW D Z EY N OW SH IY OW EH DD TH ER Z AX KD TD L IX R K OW UH R OW R AY OW D \#\newline
+\# L ER K AX SH ER Z AX N OW SH AX PD \#\newline
+\# HH OW SH AX PD TD L IY AX SH ER Z AX KD \#\newline
+\# IH M P IH JH M AX L IY L \#\newline
+KF-1002.trans 2 \newline
+\# M AX N \#\newline
+\# D IX NG \#\newline
+\# L IY \#\newline
+\# M Y UW N \#\newline
+\# R \#\newline
+\# N AH K L \#\newline
+\# M \#\newline
+\# N TD \#\newline
+\# K AO R AH S TD \#\newline
+\# L AY V AX N \#\newline
+\# M EH N EH M IH CH AX S T OW \#\newline
+\# SH EH SH EH L \#\newline
+\# P EY M AO R EH DX IX V ER T IH Z \#\newline
+\# F AO R W IH DX AX L \#\newline
+\# HH AO R DD \#\newline
+\# M \#\newline
+\# L IX NG KD \#\newline
+\# HH AY M P IH R AE K AX N \#\newline
+\# S \#\newline
+\# B AX N \#\newline
+\# L UH KD \#\newline
+\# M T EH R \#\newline
+\# B IH TD \#\newline
+\# HH AE F \#\newline
+\# D \#\newline
+\# P AA \#\newline
+KF-1002.trans 3 \newline
+\# K ER AX N TD L IY \#\newline
+\# T ER N \#\newline
+\# K ER AX N TD L IY \#\newline
+\# DH OW \#\newline
+\# D \#\newline
+\# F ER DH \#\newline
+\# IX N V AA L V \#\newline
+\# S ER F AX \#\newline
+\# L ER N \#\newline
+\# R AX K AX N S ER T AX \#\newline
+\# K ER AX N TD L IY \#\newline
+\# S ER F AX \#\newline
+\# W ER L \#\newline
+\# IH NG KD \#\newline
+\# T ER N \#\newline
+\# D \#\newline
+\# G ER L \#\newline
+\# K AX N TD L IY \#\newline
+\# AO \#\newline
+\# K ER AX N TD L IY \#\newline
+\# L ER N \#\newline
+\# R AX K AX N TD L \#\newline
+\# DH OW \#\newline
+\# S EY V \#\newline
+\# AE N DD \#\newline
+\# DH EY \#\newline
+\# P AX N \#\newline
+aesop.trans 2\newline
+\# AE N DD \#\newline
+\# AE N EH R EH TD \#\newline
+\# S \#\newline
+\# JH AXR \#\newline
+\# W AO R IY DX AXR M \#\newline
+\# AE N TD \#\newline
+\# HH AXR S EY M AY DD \#\newline
+\# S \#\newline
+\# W UH CH AXR \#\newline
+\# DH \#\newline
+\# IH DH AH \#\newline
+\# AX \#\newline
+\# T AO L \#\newline
+\# T EY \#\newline
+\# HH AA N \#\newline
+\# AA Z \#\newline
+\# IH Z \#\newline
+\# DH EY \#\newline
+\# AE TD \#\newline
+\# R EY K AA Z \#\newline
+\# EH L AX N DD \#\newline
+\# IH L \#\newline
+\# IY Z AX Z IH B AX L \#\newline
+\# AO F T IX K AX L \#\newline
+\# HH ER K Y UH R \#\newline
+\# AE TD L AXR L AO NG \#\newline
+aesop.trans 3 \newline
+\# AY Z IX KD T \#\newline
+\# AE TD L AXR L AO \#\newline
+\# HH ER K Y UH R \#\newline
+\# HH ER K Y UH R \#\newline
+\# AA \#\newline
+\# DH OW Z \#\newline
+\# SH \#\newline
+\# DH AH S TD L AXR L AO \#\newline
+\# S OW \#\newline
+\# AH PD T \#\newline
+\# S OW \#\newline
+\# HH ER K Y UH R \#\newline
+\# W ER TH L AX D Z M IX N S ER V IX \#\newline
+\# HH ER K Y UH R \#\newline
+\# P ER \#\newline
+\# DH AH S TD L AXR L AO \#\newline
+\# HH ER K Y UH R \#\newline
+\# IH L \#\newline
+\# AX V ER S TD L AXR L AO \#\newline
+\# AE TD L AXR L AO \#\newline

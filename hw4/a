@@ -1,0 +1,16 @@
+Tag FreqDist for news:
+(218, [(u'NN', 13162), (u'IN', 10616), (u'AT', 8893), (u'NP', 6866), (u',', 5133), (u'NNS', 5066), (u'.', 4452), (u'JJ', 4392), (u'CC', 2664), (u'VBD', 2524)])
+Tag FreqDist for science_fiction:
+(127, [(u'NN', 1541), (u'IN', 1176), (u'.', 1077), (u'AT', 1040), (u',', 791), (u'JJ', 723), (u'NNS', 532), (u'VBD', 531), (u'RB', 522), (u'VB', 495)])
+Tag FreqDist for news with Universal tagset:
+(12, [(u'NOUN', 30654), (u'VERB', 14399), (u'ADP', 12355), (u'.', 11928), (u'DET', 11389), (u'ADJ', 6706), (u'ADV', 3349), (u'CONJ', 2717), (u'PRON', 2535), (u'PRT', 2264)])
+Tag FreqDist for science_fiction with Universal tagset:
+(12, [(u'NOUN', 2747), (u'VERB', 2579), (u'.', 2428), (u'DET', 1582), (u'ADP', 1451), (u'PRON', 934), (u'ADJ', 929), (u'ADV', 828), (u'PRT', 483), (u'CONJ', 416)])
+Sentenced tagged with nltk.HiddenMarkovModelTagger:
+[(u'The', u'AT'), (u"mayor's", u'QL'), (u'present', u'JJ'), (u'term', u'NN'), (u'of', u'IN'), (u'office', u'NN'), (u'expires', u'.'), (u'Jan.', u'.'), (u'1', u'.'), (u'.', u'.')]
+Eval score:
+0.714726631393
+Sentenced tagged with nltk.HiddenMarkovModelTagger:
+[(u'The', u'AT'), (u"mayor's", u'NN$'), (u'present', u'JJ'), (u'term', u'NN'), (u'of', u'IN'), (u'office', u'NN'), (u'expires', u'IN'), (u'Jan.', u'NP'), (u'1', u'CD'), (u'.', u'.')]
+Eval score:
+0.86860670194

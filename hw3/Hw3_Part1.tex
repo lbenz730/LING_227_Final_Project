@@ -1,0 +1,651 @@
+% --------------------------------------------------------------
+% This is all preamble stuff that you don't have to worry about.
+% Head down to where it says "Start here"
+% --------------------------------------------------------------
+ 
+\documentclass[12pt]{article}
+ 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{textcomp}
+\usepackage{circuitikz}
+\usepackage{graphicx} 
+\usepackage{amsmath}
+\usepackage{mathtools}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{answer}
+
+ 
+\begin{document}
+ 
+% --------------------------------------------------------------
+%                         Start here
+% --------------------------------------------------------------
+ 
+\title{PSET 3}%replace X with the appropriate number
+\author{Kevin Truong\\ %replace with your name
+LING227: Language and Computation} %if necessary, replace with your course title
+ 
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% QUESTION 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\begin{problem}{I.A} 
+\end{problem}
+
+\begin{answer}{a.}
+Since Y $\subset$ Z, let X $\subset$ Z and $\forall x \in X: x \notin Y$. Z = Y $\cup$ X and P(Z) = P(Y $\cup$ X) = P (Y) + P(X). P(Y) $<=$ P(Y) + P(X) $\implies$ P(Y) $<$ P(Z). Q.E.D.
+\end{answer}
+
+\begin{answer}{b.}
+To prove p(X$|$Z) is in the range [0,1], there are three cases that need to be considered based on the definition of  p(X$|$Z): X $\cup$ Z = $\emptyset$,  X $\cup$ Z = Z, and X $\cup$ Z $\subset$ Z. For the first case, P($\emptyset$) = 0 based on the proof in part c, so p(X$|$Z) = 0. For the second case, $\frac{P(Z)}{P(Z)}$ = 1. For the third case,  p(X$|$Z) $<$ P(Z) based on part a and $>$, so  p(X$|$Z) = (0, 1). Since all three cases are satisfied, p(X$|$Z) is in the range [0,1]. Q.E.D.
+\end{answer}
+
+\begin{answer}{c.}
+Let Y $\subset$ Z, Y = Z, and X $\subset$ Z such that $\forall x \in X: x \notin Y$. From part a, P(Y) $<=$ P(Z) but in this case since Y =  Z, P(Y) = P(Z). From part a, P(Y) $=$ P(Y) + P(X). X in this case is $\emptyset$ For the equality to hold, P(X) must equal 0. Q.E.D.
+\end{answer}
+
+\begin{answer}{d.}
+P(X $\cap$ $\overline{X}$) = p($\mathcal{E}$). P(X) + P($\overline{X}$) = 1. P(X) = 1 - P($\overline{X}$) Q.E.D.
+\end{answer}
+
+\begin{answer}{e.}
+p(singing $\cup$ raining $|$ raining) = $\frac {P(singing \cap raining \cap raining)} {P(raining)}$ = $\frac {P(singing \cap raining)} {P(raining)}$ given that raining $\cap$ raining = raining. Also p(singing  $|$ raining) = $\frac {P(singing \cap raining)} {P(raining)}$ Q.E.D
+\end{answer}
+\begin{answer}{f.}
+P(X$|$Y $\cap$ $\overline{X}|Y$) = p($\mathcal{E}$). P(X$|$Y) + P($\overline{X}|$Y) = 1. P(X$|$Y) = 1 - P($\overline{X}|$Y) Q.E.D.
+\end{answer}
+\begin{answer}{g.}
+(P(X$|$Y) P(Y) + P(X$|\overline{Y})$P($\overline{Y}$) * $\frac{P(Z | X)}{P(\overline{Z})}$. P(X$|$Y) P(Y) + P(X$|\overline{Y}$)P($\overline{Y}$) = P(X$\cap$Y) + P(X$\cap \overline{Y})$ = P(Y $\cap$ X) + P( $\overline{Y}  $ $\cap$ X). From part f, $\frac{P(Y \cap X)}{P(X)}$ + $\frac{P(\overline{Y}  \cap X)} {P(X)}$ = . Therefore P(Y $\cap$ X) + P( $\overline{Y}  $ $\cap$ X) = P(X). The current equation is P(X)$\frac{P(Z | X)}{P(\overline{Z})}$. $\frac{P(Z | X)}{P(\overline{Z})}$ = $\frac{P(Z \cap X)}{P(X) P(\overline{Z})}$. The equation is reduced to $\frac{P(Z \cap X)}{P(\overline{Z})}$
+\end{answer}
+\begin{answer}{h.}
+P(X$|$Y,Z) = P(X$|$Y) * Z. Since P(X$|$Y) = 0,  P(X$|$Y) * Z = 0. Q.E.D.
+\end{answer}
+
+\begin{problem}{I.B}
+\end{problem}
+\begin{answer}{a.}
+$\forall y \in situation \sum_{x \in cry} p(x | y ) = 1 $
+\end{answer}
+\begin{answer}{b.}
+\newpage
+\begin{center}
+\begin{table}
+    \begin{tabular}{| c| | c | c | c | c|}
+        \hline
+        p(cry, situation)& Predator! & Timber! & I need help! & TOTAL\\ 			        \hline
+        \hline
+        bwa & 0 & 0 & 0.64 & 0.64\\ 
+        bee & 0 & 0  & 0.08 & 0.08\\
+        kiki & 0.2 & 0  & 0.08 & 0.28\\
+        TOTAL & 0.2 & 0 & .8 & 1\\
+        \hline
+    \end{tabular}
+\end{table}
+\end{center}
+\end{answer}
+
+
+\begin{answer}{1.}
+This probability is written as: p(Predator $|$ kiki)
+\end{answer}
+
+\begin{answer}{2.}
+$\frac{p(Predator, kiki)}{p(kiki)}$
+\end{answer}
+
+\begin{answer}{3.}
+$\frac{.2}{.28}$ = $\frac{2}{2.8}$
+\end{answer}
+
+\begin{answer}{4.}
+$\frac{p(kiki | Predator)p(Predator)}{p(kiki | Predator) p(Predator) + p(kiki | Timber) p(Timber) + p(kiki | I need help) p(I need help)}$
+\end{answer}
+
+\begin{answer}{5.}
+$\frac{1 * 0.2}{0.2 + 0 + 0.08}$ =  $\frac{2}{2.8}$
+\end{answer}
+
+\begin{problem}{I.C}
+\end{problem}
+
+\begin{answer}{}
+Let w = ``I love New York". P(w) = P($w_1| w_{bos} , w_{bos})$ * P($w_2| w_{bos} , w_{1})$ * P($w_3| w_1 , w_{2})$ * P($w_4| w_2, w_{3}) * P(w_{eos}| w_3 , w_{4})$. 
+
+Using chain rule, P(A,B,C) = $P(A| B,C) P(B,C) = P(A|B,C) P(B|C) P(C)$. Therefore, P(w) = $\frac{P(w_1, w_{bos} , w_{bos})}{P(w_{bos} , w_{bos})}$ *  $\frac{P(w_2, w_{bos} , w_{1})}{P(w_{bos} , w_{1})}$ *  $\frac{P(w_3, w_{1} , w_{2})}{P(w_{1} , w_{2})}$  * $\frac{P(w_4, w_{2} , w_{3})}{P(w_{2} , w_{3})}$ * $\frac{P(w_{eos}, w_{3} , w_{4})}{P(w_{3} , w_{4})}$.\\
+P($w_{reversed}$) =  P($w_{bos}| w_1 , w_{2})$* P($w_1| w_2 , w_{3})$ * P($w_2| w_3 , w_{4})$ * P($w_3| w_4 , w_{eos})$ * P($w_4| w_{eos} , w_{eos})$ Using the chain rule, 
+
+$P_{reversed}$(w) = $\frac{P(w_{bos}, w_{1} , w_{2})}{P(w_{1} , w_{2})}$ * $\frac{P(w_1, w_{2} , w_{3})}{P(w_{2} , w_{3})}$ *  $\frac{P(w_2, w_{3} , w_{4})}{P(w_{3} , w_{4})}$ *  $\frac{P(w_3, w_{4} , w_{eos})}{P(w_{4} , w_{eos})}$  * $\frac{P(w_4, w_{eos} , w_{eos})}{P(w_{eos} , w_{eos})}$ Look at terms from the start of P(w) and the terms starting from of the end of $P_{reversed}$, we see that there is congruency between eos and pos because they have the same count. Let n = 1, then P(w) =  $\frac{P(eos,bos,w)}{P(bos,w)}$ + $\frac{P(bos,bos,w)}{P(bos,bos)}$. For $P_{rev}$ it is the same but the eos and bos are flipped. $P_{rev}$ =  $\frac{P(bos,eos,w)}{P(eos,w)}$ + $\frac{P(eos,eos,w)}{P(eos,eos)}$.  For the induction step, P(w) will be $$ P(1) * \prod_{2}^{w} \frac{P(w_n, w_{n-1}, w_{n-2})}{P(w_{n-1}, w_{n-2})}$$ and $P_{reversed}(w)$ will always be $$P_{reversed}(1) * \prod_{2}^{w+1} \frac{P_{reversed} (w_n, w_{n+1}, w_{n+2})}{P(w_{n+1}, w_{n+2})}$$. Examining the case from n = 3 to w for P(w) and n = 2 to w-1 for $P_{reversed}$, the counts are going to be the same since they do not consider eos and bos.
+\end{answer}
+
+\begin{problem}{I.D}
+\end{problem}
+
+\begin{answer}{Absolute Discounting}
+$$\sum_{w_n: r > 0} \frac{r - \sigma}{N}  = \frac{N - (V - N_0)\sigma}{N}$$\\ $$\sum_{w_n: r = 0}^{N_0}\frac{(V - N_0)\sigma}{NN_0} = N_0 \frac{(V - N_0)\sigma}{NN_0}$$ 
+
+
+$$\sum_{w_n: r = 0} \frac{r - \sigma}{N} + \sum_{w_n: r = 0}^{N_0}\frac{(V - N_0)\sigma}{NN_0} =   \frac{(V - N_0)\sigma}{N}  +  \frac{N - (V - N_0)\sigma}{N} = 1$$\\
+\end{answer}
+
+\begin{answer}{Linear Discounting}
+$$\sum_{w_n: r > 0} \frac{(1 - \alpha)r }{N}  = \frac{(1 - \alpha)r }{N} N = 1 - \alpha$$
+$$\sum_{w_n: r = 0}^{N_0}\frac{\alpha}{N_0} = N_0\frac{\alpha}{N_0} = \alpha$$
+
+$$ \sum_{w_n: r > 0} \frac{(1 - \alpha)r }{N} + \sum_{w_n: r = 0}^{N_0}\frac{\alpha}{N_0} = 1 $$
+\end{answer}
+
+
+\begin{problem}{2.A}
+\end{problem}
+
+\begin{answer}{}
+The words generated by the bigrams are about the same length with the words generated by the trigram for the KF and aesop corpuses. For the lexicon, trigrams are much longer than the bigrams.\\
+
+\textbf{lexicon.trans 2}\newline
+\# T R IY \#\newline
+\# V EY DD \#\newline
+\# AE KD \#\newline
+\# K AXR \#\newline
+\# B AXR AX L AE KD T R EY DX IX F AX S T R IX S AXR \#\newline
+\# HH AY T N \#\newline
+\# V EH P AO R DD \#\newline
+\# HH AW N AA IY M N Z \#\newline
+\# CH AXR \#\newline
+\# B OW L \#\newline
+\# W IH R DX IX NG \#\newline
+\# D EH L EH N B AH T R AX N D IH S SH F AO R AY KD \#\newline
+\# R T AA B S EH N IY \#\newline
+\# AX \#\newline
+\# TH AXR B IX K IH L \#\newline
+\# M AX N D UW M P EH R IH N \#\newline
+\# IH DX IX NG \#\newline
+\# S K AX L \#\newline
+\# HH UW G AE K IY \#\newline
+\# M \#\newline
+\# S AE L \#\newline
+\# D L AA R AY N TD B UH TD \#\newline
+\# S AX N \#\newline
+\# W IX NG Z AA JH \#\newline
+\# Y AX V AY AE K ER F AE S KD \#\newline
+\textbf{lexicon.trans 3} \newline
+\# AX SH ER Z AX KD \#\newline
+\# IX SH \#\newline
+\# IX SH \#\newline
+\# B OW SH AX N OW SH AX N OW SH AX PD TD L AX T OW SH AX PD \#\newline
+\# HH OW SH AX PD TD L AX SH ER Z AX KD TD L AX SH ER Z AX KD TD L EH GD \#\newline
+\# N OW SH AX \#\newline
+\# M OW SH AX PD TD L IY OW EH DD TH ER Z AX KD TD L \#\newline
+\# CH ER TD L AE GD T AE R AX OW K EY OW V ER L Y AX L OW SH AX N Z OW Z D AX SH ER Z AX KD TD L AXR OW K OW UH R AX OW K OW UH R OW R AY OW D Z EY N OW SH AX N OW SH AX N OW SH AX L OW SH AX N OW SH AX N OW SH AX N TD P OW SH AX PD TD L IY B OW SH AX N TD P OW SH AX PD TD L IY OW EH DD TH ER Z AX KD TD L AX SH ER Z AX KD TD L AXR OW K Y ER K AX SH ER Z AX KD TD L AO R AX OW K OW UH R OW R AY OW D Z EY N OW SH AX N OW SH AX N OW SH AX N OW SH AX PD TD L AX SH ER Z AX KD \#\newline
+\# R Y AX EH N OW SH AX N OW SH AX PD TD L \#\newline
+\# Y ER K S OW SH AX N Z OW Z D AX SH ER Z AX KD TD L AX SH ER Z AX KD TD L AX SH ER Z AX M OW SH AX N Z OW Z D AX SH ER Z AX KD TD \#\newline
+\# L ER K AX SH ER Z AX KD TD L IY OW EH DD TH ER Z AX KD TD L AO R T OW SH AX PD \#\newline
+\# S OW SH AX PD TD L AX JH ER Z AX KD \#\newline
+\# B AA SH \#\newline
+\# S OW SH AX \#\newline
+\# W ER KD D ER TD L IY OW EH DD TH ER Z AX KD TD L AY SH AW TD P OW SH AX N OW SH AX N OW SH AX PD TD L IY OW EH DD TH ER Z AX M OW SH AX PD \#\newline
+\# P OW SH AX N Z OW Z D AX SH ER Z AX TD W AO PD \#\newline
+\# EY OW V ER L Y AX EH N OW SH AX PD TD L IY OW EH DD TH ER Z AX N OW SH AX N OW SH AX PD TD L IY OW EH DD TH ER Z AX M OW SH AX PD \#\newline
+\# Y ER K AX L OW SH IY OW EH DD TH ER Z \#\newline
+\# S OW SH AX N OW SH AX N OW SH AX N OW SH AX PD \#\newline
+\# P OW SH AX N OW SH AX PD TD L IY OW EH DD TH ER Z AX KD TD L AX SH ER Z AX KD TD L AX SH ER Z AX KD TD L AXR OW K OW UH R OW R AY OW D Z EY N OW SH AX N OW SH AX N OW SH AX N DD \#\newline
+\# L ER K AX SH ER Z AX B OW SH AX N OW SH AX N IH GD T AE R AX OW K OW UH R OW R AY OW D Z EY N OW SH AX N OW SH AX PD TD L IY OW EH DD TH ER Z AX KD TD L AX SH ER Z AX KD \#\newline
+\# AE GD T AE R AX OW K OW UH R OW R AY OW D Z EY N OW SH AX L OW SH AX N OW SH AX L OW K OW UH R AX OW K OW UH R IX \#\newline
+\# W ER SH AX B OW SH AX PD TD L AX SH ER Z AX KD TD L IX R K OW UH R AX OW K OW UH R AX OW K OW UH R OW R AY OW D Z EY N OW SH IY OW EH DD TH ER Z AX KD TD L IX R K OW UH R OW R AY OW D \#\newline
+\# L ER K AX SH ER Z AX N OW SH AX PD \#\newline
+\# HH OW SH AX PD TD L IY AX SH ER Z AX KD \#\newline
+\# IH M P IH JH M AX L IY L \#\newline
+\textbf{KF-1002.trans 2} \newline
+\# M AX N \#\newline
+\# D IX NG \#\newline
+\# L IY \#\newline
+\# M Y UW N \#\newline
+\# R \#\newline
+\# N AH K L \#\newline
+\# M \#\newline
+\# N TD \#\newline
+\# K AO R AH S TD \#\newline
+\# L AY V AX N \#\newline
+\# M EH N EH M IH CH AX S T OW \#\newline
+\# SH EH SH EH L \#\newline
+\# P EY M AO R EH DX IX V ER T IH Z \#\newline
+\# F AO R W IH DX AX L \#\newline
+\# HH AO R DD \#\newline
+\# M \#\newline
+\# L IX NG KD \#\newline
+\# HH AY M P IH R AE K AX N \#\newline
+\# S \#\newline
+\# B AX N \#\newline
+\# L UH KD \#\newline
+\# M T EH R \#\newline
+\# B IH TD \#\newline
+\# HH AE F \#\newline
+\# D \#\newline
+\# P AA \#\newline
+\textbf{KF-1002.trans 3} \newline
+\# K ER AX N TD L IY \#\newline
+\# T ER N \#\newline
+\# K ER AX N TD L IY \#\newline
+\# DH OW \#\newline
+\# D \#\newline
+\# F ER DH \#\newline
+\# IX N V AA L V \#\newline
+\# S ER F AX \#\newline
+\# L ER N \#\newline
+\# R AX K AX N S ER T AX \#\newline
+\# K ER AX N TD L IY \#\newline
+\# S ER F AX \#\newline
+\# W ER L \#\newline
+\# IH NG KD \#\newline
+\# T ER N \#\newline
+\# D \#\newline
+\# G ER L \#\newline
+\# K AX N TD L IY \#\newline
+\# AO \#\newline
+\# K ER AX N TD L IY \#\newline
+\# L ER N \#\newline
+\# R AX K AX N TD L \#\newline
+\# DH OW \#\newline
+\# S EY V \#\newline
+\# AE N DD \#\newline
+\# DH EY \#\newline
+\# P AX N \#\newline
+\textbf{aesop.trans 2}\newline
+\# AE N DD \#\newline
+\# AE N EH R EH TD \#\newline
+\# S \#\newline
+\# JH AXR \#\newline
+\# W AO R IY DX AXR M \#\newline
+\# AE N TD \#\newline
+\# HH AXR S EY M AY DD \#\newline
+\# S \#\newline
+\# W UH CH AXR \#\newline
+\# DH \#\newline
+\# IH DH AH \#\newline
+\# AX \#\newline
+\# T AO L \#\newline
+\# T EY \#\newline
+\# HH AA N \#\newline
+\# AA Z \#\newline
+\# IH Z \#\newline
+\# DH EY \#\newline
+\# AE TD \#\newline
+\# R EY K AA Z \#\newline
+\# EH L AX N DD \#\newline
+\# IH L \#\newline
+\# IY Z AX Z IH B AX L \#\newline
+\# AO F T IX K AX L \#\newline
+\# HH ER K Y UH R \#\newline
+\# AE TD L AXR L AO NG \#\newline
+\textbf{aesop.trans 3} \newline
+\# AY Z IX KD T \#\newline
+\# AE TD L AXR L AO \#\newline
+\# HH ER K Y UH R \#\newline
+\# HH ER K Y UH R \#\newline
+\# AA \#\newline
+\# DH OW Z \#\newline
+\# SH \#\newline
+\# DH AH S TD L AXR L AO \#\newline
+\# S OW \#\newline
+\# AH PD T \#\newline
+\# S OW \#\newline
+\# HH ER K Y UH R \#\newline
+\# W ER TH L AX D Z M IX N S ER V IX \#\newline
+\# HH ER K Y UH R \#\newline
+\# P ER \#\newline
+\# DH AH S TD L AXR L AO \#\newline
+\# HH ER K Y UH R \#\newline
+\# IH L \#\newline
+\# AX V ER S TD L AXR L AO \#\newline
+\# AE TD L AXR L AO \#\newline
+\end{answer}
+
+\begin{problem}{2.B}
+\end{problem}
+
+\begin{answer}{}
+For aesop, only bigrams can distinguish all the words.  For KF-1002, neither the bigrams or the trigrams can distinguish between  all the good from the bad words. On average for KF-1002, more words have non-zero probability for the good words. For lexicon, only the bigrams can distinguish between all the good and bad words. To distinguish between the good and bad words, the probability of the words has to be non zero for good words. If all the words are accepted, the perplexity is finite. For the two corpuses that can distiniguish between good and bad words aesop and lexicon, bigram lexicon has about half the perplexity of aesop. This suggests that lexicon is a better training file.
+
+aesop 2 good\newline
+P( \# M IY D AH T \# ) = 4.47849894351e-11\newline
+P( \# K IY N AH P \# ) = 3.14257904757e-10\newline
+P( \# HH EY N AH T \# ) = 2.43272709801e-10\newline
+P( \# S AE SH AH M \# ) = 1.26223683022e-10\newline
+P( \# S IY N AH N \# ) = 6.58399744881e-08\newline
+P( \# M AE L AH P \# ) = 1.86754681778e-10\newline
+P( \# K IH N AH M \# ) = 1.88222679252e-07\newline
+P( \# HH AE L AH M \# ) = 4.52792530301e-08\newline
+P( \# HH IH D AH P \# ) = 3.55969710305e-09\newline
+P( \# S AE N AH P \# ) = 3.98751848147e-09\newline
+P( \# M EY L AH P \# ) = 7.60575516058e-10\newline
+P( \# K IH D AH T \# ) = 9.98670172858e-11\newline
+P( \# S IH D AH T \# ) = 6.13789697844e-11\newline
+P( \# HH EY SH AH M \# ) = 4.43367811153e-10\newline
+P( \# K EY L AH M \# ) = 4.43666780845e-08\newline
+P( \# M IY N AH P \# ) = 8.02220083254e-10\newline
+P( \# HH IH SH AH P \# ) = 7.60364052343e-10\newline
+P( \# K IY D AH N \# ) = 2.66081878834e-09\newline
+P( \# M AE N AH N \# ) = 1.2220305472e-06\newline
+P( \# S IH SH AH P \# ) = 2.62215356211e-11\newline
+P( \# K EY L AH M \# ) = 4.43666780845e-08\newline
+P( \# M EY N AH M \# ) = 9.95889703025e-08\newline
+P( \# S IH L AH P \# ) = 4.8046147492e-10\newline
+P( \# HH AE L AH N \# ) = 8.44346726585e-08\newline
+Perplexity = 27.49827096\newline
+aesop 3 good\newline
+P( \# M IY D AH T \# ) = 0\newline
+P( \# K IY N AH P \# ) = 0\newline
+P( \# HH EY N AH T \# ) = 0\newline
+P( \# S AE SH AH M \# ) = 0\newline
+P( \# S IY N AH N \# ) = 0\newline
+P( \# M AE L AH P \# ) = 0\newline
+P( \# K IH N AH M \# ) = 0\newline
+P( \# HH AE L AH M \# ) = 0\newline
+P( \# HH IH D AH P \# ) = 0\newline
+P( \# S AE N AH P \# ) = 0\newline
+P( \# M EY L AH P \# ) = 0\newline
+P( \# K IH D AH T \# ) = 0\newline
+P( \# S IH D AH T \# ) = 0\newline
+P( \# HH EY SH AH M \# ) = 0\newline
+P( \# K EY L AH M \# ) = 0\newline
+P( \# M IY N AH P \# ) = 0\newline
+P( \# HH IH SH AH P \# ) = 0\newline
+P( \# K IY D AH N \# ) = 0\newline
+P( \# M AE N AH N \# ) = 0\newline
+P( \# S IH SH AH P \# ) = 0\newline
+P( \# K EY L AH M \# ) = 0\newline
+P( \# M EY N AH M \# ) = 0\newline
+P( \# S IH L AH P \# ) = 0\newline
+P( \# HH AE L AH N \# ) = 0\newline
+Perplexity = inf\newline
+aesop 2 bad \newline
+P( \# Z OW ZH AH SH \# ) = 0\newline
+P( \# Y UH G OW L \# ) = 0\newline
+P( \# V AO TH AH SH \# ) = 0\newline
+P( \# G UW DH UH S \# ) = 0\newline
+P( \# V UW G UH S \# ) = 0\newline
+P( \# G AO DH AH SH \# ) = 0\newline
+P( \# Z UW TH EH D \# ) = 0\newline
+P( \# Y AO ZH OW L \# ) = 0\newline
+P( \# G OW G EH D \# ) = 0\newline
+P( \# V UH DH OW L \# ) = 0\newline
+P( \# Z UH TH UH S \# ) = 0\newline
+P( \# Y OW ZH AH SH \# ) = 0\newline
+P( \# G UW ZH AH D \# ) = 0\newline
+P( \# V AO DH UH S \# ) = 0\newline
+P( \# Y UH TH AH SH \# ) = 0\newline
+P( \# Z OW G OW L \# ) = 0\newline
+P( \# Y AO ZH AH D \# ) = 0\newline
+P( \# Z UH TH UH S \# ) = 0\newline
+P( \# G AO DH OW L \# ) = 0\newline
+P( \# V UW G EH D \# ) = 0\newline
+P( \# Y OW ZH OW L \# ) = 0\newline
+P( \# Z UW TH EH D \# ) = 0\newline
+P( \# V UH DH AH SH \# ) = 0\newline
+P( \# G OW G UH S \# ) = 0\newline
+Perplexity = inf\newline
+aesop 3 bad \newline
+P( \# Z OW ZH AH SH \# ) = 0\newline
+P( \# Y UH G OW L \# ) = 0\newline
+P( \# V AO TH AH SH \# ) = 0\newline
+P( \# G UW DH UH S \# ) = 0\newline
+P( \# V UW G UH S \# ) = 0\newline
+P( \# G AO DH AH SH \# ) = 0\newline
+P( \# Z UW TH EH D \# ) = 0\newline
+P( \# Y AO ZH OW L \# ) = 0\newline
+P( \# G OW G EH D \# ) = 0\newline
+P( \# V UH DH OW L \# ) = 0\newline
+P( \# Z UH TH UH S \# ) = 0\newline
+P( \# Y OW ZH AH SH \# ) = 0\newline
+P( \# G UW ZH AH D \# ) = 0\newline
+P( \# V AO DH UH S \# ) = 0\newline
+P( \# Y UH TH AH SH \# ) = 0\newline
+P( \# Z OW G OW L \# ) = 0\newline
+P( \# Y AO ZH AH D \# ) = 0\newline
+P( \# Z UH TH UH S \# ) = 0\newline
+P( \# G AO DH OW L \# ) = 0\newline
+P( \# V UW G EH D \# ) = 0\newline
+P( \# Y OW ZH OW L \# ) = 0\newline
+P( \# Z UW TH EH D \# ) = 0\newline
+P( \# V UH DH AH SH \# ) = 0\newline
+P( \# G OW G UH S \# ) = 0\newline
+Perplexity = inf\newline
+KF-1002 2 good\newline
+P( \# M IY D AH T \# ) = 0\newline
+P( \# K IY N AH P \# ) = 4.87893708618e-09\newline
+P( \# HH EY N AH T \# ) = 0\newline
+P( \# S AE SH AH M \# ) = 0\newline
+P( \# S IY N AH N \# ) = 6.48209634127e-07\newline
+P( \# M AE L AH P \# ) = 2.11281606011e-08\newline
+P( \# K IH N AH M \# ) = 2.06025736405e-07\newline
+P( \# HH AE L AH M \# ) = 7.51808064706e-07\newline
+P( \# HH IH D AH P \# ) = 2.33319744219e-08\newline
+P( \# S AE N AH P \# ) = 2.08024497477e-08\newline
+P( \# M EY L AH P \# ) = 1.21516597839e-08\newline
+P( \# K IH D AH T \# ) = 0\newline
+P( \# S IH D AH T \# ) = 0\newline
+P( \# HH EY SH AH M \# ) = 0\newline
+P( \# K EY L AH M \# ) = 9.39295214755e-08\newline
+P( \# M IY N AH P \# ) = 2.91749104142e-08\newline
+P( \# HH IH SH AH P \# ) = 0\newline
+P( \# K IY D AH N \# ) = 4.14709652326e-08\newline
+P( \# M AE N AH N \# ) = 3.30321702045e-06\newline
+P( \# S IH SH AH P \# ) = 0\newline
+P( \# K EY L AH M \# ) = 9.39295214755e-08\newline
+P( \# M EY N AH M \# ) = 6.58602090202e-07\newline
+P( \# S IH L AH P \# ) = 8.94338494473e-08\newline
+P( \# HH AE L AH N \# ) = 1.21445918145e-06\newline
+Perplexity = inf\newline
+KF-1002 3 good\newline
+P( \# M IY D AH T \# ) = 0\newline
+P( \# K IY N AH P \# ) = 0\newline
+P( \# HH EY N AH T \# ) = 0\newline
+P( \# S AE SH AH M \# ) = 0\newline
+P( \# S IY N AH N \# ) = 0\newline
+P( \# M AE L AH P \# ) = 0\newline
+P( \# K IH N AH M \# ) = 0\newline
+P( \# HH AE L AH M \# ) = 0\newline
+P( \# HH IH D AH P \# ) = 0\newline
+P( \# S AE N AH P \# ) = 0\newline
+P( \# M EY L AH P \# ) = 0\newline
+P( \# K IH D AH T \# ) = 0\newline
+P( \# S IH D AH T \# ) = 0\newline
+P( \# HH EY SH AH M \# ) = 0\newline
+P( \# K EY L AH M \# ) = 0\newline
+P( \# M IY N AH P \# ) = 0\newline
+P( \# HH IH SH AH P \# ) = 0\newline
+P( \# K IY D AH N \# ) = 0\newline
+P( \# M AE N AH N \# ) = 0\newline
+P( \# S IH SH AH P \# ) = 0\newline
+P( \# K EY L AH M \# ) = 0\newline
+P( \# M EY N AH M \# ) = 0\newline
+P( \# S IH L AH P \# ) = 0\newline
+P( \# HH AE L AH N \# ) = 0\newline
+Perplexity = inf\newline
+KF-1002 2 bad \newline
+P( \# Z OW ZH AH SH \# ) = 0\newline
+P( \# Y UH G OW L \# ) = 0\newline
+P( \# V AO TH AH SH \# ) = 0\newline
+P( \# G UW DH UH S \# ) = 0\newline
+P( \# V UW G UH S \# ) = 0\newline
+P( \# G AO DH AH SH \# ) = 0\newline
+P( \# Z UW TH EH D \# ) = 0\newline
+P( \# Y AO ZH OW L \# ) = 0\newline
+P( \# G OW G EH D \# ) = 1.7832805797e-08\newline
+P( \# V UH DH OW L \# ) = 0\newline
+P( \# Z UH TH UH S \# ) = 0\newline
+P( \# Y OW ZH AH SH \# ) = 0\newline
+P( \# G UW ZH AH D \# ) = 0\newline
+P( \# V AO DH UH S \# ) = 0\newline
+P( \# Y UH TH AH SH \# ) = 0\newline
+P( \# Z OW G OW L \# ) = 0\newline
+P( \# Y AO ZH AH D \# ) = 0\newline
+P( \# Z UH TH UH S \# ) = 0\newline
+P( \# G AO DH OW L \# ) = 0\newline
+P( \# V UW G EH D \# ) = 0\newline
+P( \# Y OW ZH OW L \# ) = 0\newline
+P( \# Z UW TH EH D \# ) = 0\newline
+P( \# V UH DH AH SH \# ) = 0\newline
+P( \# G OW G UH S \# ) = 0\newline
+Perplexity = inf\newline
+KF-1002 3 bad \newline
+P( \# Z OW ZH AH SH \# ) = 0\newline
+P( \# Y UH G OW L \# ) = 0\newline
+P( \# V AO TH AH SH \# ) = 0\newline
+P( \# G UW DH UH S \# ) = 0\newline
+P( \# V UW G UH S \# ) = 0\newline
+P( \# G AO DH AH SH \# ) = 0\newline
+P( \# Z UW TH EH D \# ) = 0\newline
+P( \# Y AO ZH OW L \# ) = 0\newline
+P( \# G OW G EH D \# ) = 0\newline
+P( \# V UH DH OW L \# ) = 0\newline
+P( \# Z UH TH UH S \# ) = 0\newline
+P( \# Y OW ZH AH SH \# ) = 0\newline
+P( \# G UW ZH AH D \# ) = 0\newline
+P( \# V AO DH UH S \# ) = 0\newline
+P( \# Y UH TH AH SH \# ) = 0\newline
+P( \# Z OW G OW L \# ) = 0\newline
+P( \# Y AO ZH AH D \# ) = 0\newline
+P( \# Z UH TH UH S \# ) = 0\newline
+P( \# G AO DH OW L \# ) = 0\newline
+P( \# V UW G EH D \# ) = 0\newline
+P( \# Y OW ZH OW L \# ) = 0\newline
+P( \# Z UW TH EH D \# ) = 0\newline
+P( \# V UH DH AH SH \# ) = 0\newline
+P( \# G OW G UH S \# ) = 0\newline
+Perplexity = inf\newline
+lexicon 2 good\newline
+P( \# M IY D AH T \# ) = 4.79439255397e-09\newline
+P( \# K IY N AH P \# ) = 1.88204414788e-08\newline
+P( \# HH EY N AH T \# ) = 5.31199572838e-09\newline
+P( \# S AE SH AH M \# ) = 4.95309507415e-08\newline
+P( \# S IY N AH N \# ) = 2.09488924621e-07\newline
+P( \# M AE L AH P \# ) = 1.53605337958e-07\newline
+P( \# K IH N AH M \# ) = 1.08219550361e-07\newline
+P( \# HH AE L AH M \# ) = 9.36840455715e-07\newline
+P( \# HH IH D AH P \# ) = 1.84097343074e-08\newline
+P( \# S AE N AH P \# ) = 3.74686536145e-08\newline
+P( \# M EY L AH P \# ) = 5.10597887743e-08\newline
+P( \# K IH D AH T \# ) = 4.27359772134e-09\newline
+P( \# S IH D AH T \# ) = 8.22782638088e-09\newline
+P( \# HH EY SH AH M \# ) = 2.4137365234e-07\newline
+P( \# K EY L AH M \# ) = 3.36398180465e-07\newline
+P( \# M IY N AH P \# ) = 1.10671287667e-08\newline
+P( \# HH IH SH AH P \# ) = 3.88083048461e-08\newline
+P( \# K IY D AH N \# ) = 1.69790522147e-07\newline
+P( \# M AE N AH N \# ) = 7.47439187096e-07\newline
+P( \# S IH SH AH P \# ) = 4.29276855912e-08\newline
+P( \# K EY L AH M \# ) = 3.36398180465e-07\newline
+P( \# M EY N AH M \# ) = 7.09326203721e-08\newline
+P( \# S IH L AH P \# ) = 1.57885836623e-07\newline
+P( \# HH AE L AH N \# ) = 1.96077411963e-06\newline
+Perplexity = 15.6152106001\newline
+lexicon 3 good\newline
+P( \# M IY D AH T \# ) = 2.50420650131e-14\newline
+P( \# K IY N AH P \# ) = 1.85706559332e-13\newline
+P( \# HH EY N AH T \# ) = 0\newline
+P( \# S AE SH AH M \# ) = 0\newline
+P( \# S IY N AH N \# ) = 2.8080161639e-12\newline
+P( \# M AE L AH P \# ) = 0\newline
+P( \# K IH N AH M \# ) = 0\newline
+P( \# HH AE L AH M \# ) = 0\newline
+P( \# HH IH D AH P \# ) = 0\newline
+P( \# S AE N AH P \# ) = 0\newline
+P( \# M EY L AH P \# ) = 0\newline
+P( \# K IH D AH T \# ) = 0\newline
+P( \# S IH D AH T \# ) = 0\newline
+P( \# HH EY SH AH M \# ) = 0\newline
+P( \# K EY L AH M \# ) = 0\newline
+P( \# M IY N AH P \# ) = 7.98194276759e-13\newline
+P( \# HH IH SH AH P \# ) = 0\newline
+P( \# K IY D AH N \# ) = 0\newline
+P( \# M AE N AH N \# ) = 0\newline
+P( \# S IH SH AH P \# ) = 0\newline
+P( \# K EY L AH M \# ) = 0\newline
+P( \# M EY N AH M \# ) = 0\newline
+P( \# S IH L AH P \# ) = 0\newline
+P( \# HH AE L AH N \# ) = 0\newline
+Perplexity = inf\newline
+lexicon 2 bad \newline
+P( \# Z OW ZH AH SH \# ) = 0\newline
+P( \# Y UH G OW L \# ) = 2.68307030201e-08\newline
+P( \# V AO TH AH SH \# ) = 3.50318116772e-10\newline
+P( \# G UW DH UH S \# ) = 0\newline
+P( \# V UW G UH S \# ) = 8.32344206621e-12\newline
+P( \# G AO DH AH SH \# ) = 0\newline
+P( \# Z UW TH EH D \# ) = 1.25669990038e-10\newline
+P( \# Y AO ZH OW L \# ) = 8.29870151775e-12\newline
+P( \# G OW G EH D \# ) = 7.59181243887e-09\newline
+P( \# V UH DH OW L \# ) = 0\newline
+P( \# Z UH TH UH S \# ) = 0\newline
+P( \# Y OW ZH AH SH \# ) = 0\newline
+P( \# G UW ZH AH D \# ) = 0\newline
+P( \# V AO DH UH S \# ) = 0\newline
+P( \# Y UH TH AH SH \# ) = 0\newline
+P( \# Z OW G OW L \# ) = 2.28527492015e-09\newline
+P( \# Y AO ZH AH D \# ) = 0\newline
+P( \# Z UH TH UH S \# ) = 0\newline
+P( \# G AO DH OW L \# ) = 0\newline
+P( \# V UW G EH D \# ) = 7.2688189025e-11\newline
+P( \# Y OW ZH OW L \# ) = 3.00297581885e-10\newline
+P( \# Z UW TH EH D \# ) = 1.25669990038e-10\newline
+P( \# V UH DH AH SH \# ) = 0\newline
+P( \# G OW G UH S \# ) = 8.6932983006e-10\newline
+Perplexity = inf\newline
+lexicon 3 bad \newline
+P( \# Z OW ZH AH SH \# ) = 0\newline
+P( \# Y UH G OW L \# ) = 0\newline
+P( \# V AO TH AH SH \# ) = 0\newline
+P( \# G UW DH UH S \# ) = 0\newline
+P( \# V UW G UH S \# ) = 0\newline
+P( \# G AO DH AH SH \# ) = 0\newline
+P( \# Z UW TH EH D \# ) = 0\newline
+P( \# Y AO ZH OW L \# ) = 0\newline
+P( \# G OW G EH D \# ) = 1.37509430504e-14\newline
+P( \# V UH DH OW L \# ) = 0\newline
+P( \# Z UH TH UH S \# ) = 0\newline
+P( \# Y OW ZH AH SH \# ) = 0\newline
+P( \# G UW ZH AH D \# ) = 0\newline
+P( \# V AO DH UH S \# ) = 0\newline
+P( \# Y UH TH AH SH \# ) = 0\newline
+P( \# Z OW G OW L \# ) = 0\newline
+P( \# Y AO ZH AH D \# ) = 0\newline
+P( \# Z UH TH UH S \# ) = 0\newline
+P( \# G AO DH OW L \# ) = 0\newline
+P( \# V UW G EH D \# ) = 0\newline
+P( \# Y OW ZH OW L \# ) = 0\newline
+P( \# Z UW TH EH D \# ) = 0\newline
+P( \# V UH DH AH SH \# ) = 0\newline
+P( \# G OW G UH S \# ) = 0\newline
+Perplexity = inf\newline
+\end{answer}
+
+\begin{problem}{2.C}
+\end{problem}
+
+\begin{answer}{}
+When add one smothing is added, the perplexities that were infinite are now finite but very big. The add1 smoothing causes the probabilty of the words that have been seen to significantly decrease. For the generation part, the trigrams are signifincanntly longer than their bigram counterparts for lexicon and aesop. For KF, the bigrams are a lot longer.
+\end{answer}
+
+\begin{problem}{2.D}
+I implemented add-lambda smoothing. To maximize the difference between the two files, I thought it would be best to find the lambda which the difference of the perplexities are the largest. I found that 0.0364 was the point where the difference was the biggest. I used KF and bigrams. 
+\end{problem}
+% --------------------------------------------------------------
+%     You don't have to mess with anything below this line.
+% --------------------------------------------------------------
+ 
+\end{document}
