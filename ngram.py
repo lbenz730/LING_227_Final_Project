@@ -4,9 +4,8 @@ import random
 import numpy as np
 from collections import defaultdict
 
-# boolean variable for add-1 smoothing:
-add = 'false'
-add_var = 1
+# boolean variable for good-turing smoothing:
+good_turing = 'false'
 
 
 # set up dictionaries
@@ -42,34 +41,84 @@ def train_data():
 			# get list of phones
 			bi_phones = re.findall(r'[A-Z]+|#', bi_text)
 
-			if add == 'true':
-				# get list of unique phones for smoothing
-				unique_phones = list(set(bi_phones))
-				for i in range(len(unique_phones)):
-					for j in range(len(unique_phones)):
-						counts[unique_phones[i]] += add_var
-						counts[unique_phones[j]] += add_var
-						bi_counts[unique_phones[i]][unique_phones[j]] += add_var
-
 			for i in range(len(bi_phones)-1):
 				counts[bi_phones[i]] += 1
 				bi_counts[bi_phones[i]][bi_phones[i+1]] += 1
+
+			# implement good turning 
+			if good_turing:
+				
+				# sort counts 
+				counts_sorted = sorted(counts.items(), key=lambda x:x[1])
+
+
+				# sort counts using good turing smoothing - map n_r with 0 counts to log space
+				# iterate up to max counts
+
+				# first compute loglinear regression 
+
+				# get counts of counts
+				count_counts = {} 
+				for i in range(len(1, counts_sorted[len(counts_sorted)-1])):
+
+					for count in counts_sorted:
+						if count[1] == i:
+							count_counts[i] += 1 
+
+				n_r = defaultdict(lambda:0)
+				for i in range(len(1, counts_sorted[len(counts_sorted)-1])):
+
+					# check to see if there is no element in counts_sorted with count i
+					if i not in counts_sorted.values():
+
+						# smooth given count
+						# use Gale Sampson smoothing equation: log(n_r) = a + blog(c)
+						n_r = (2 ** )
+
+					# else count up number of counts that occur 
+					else:
+						for count in counts_sorted:
+							if count[1] == i:
+								n_r[i] += 1
+
+
+
+				# compute adjust counts use equation r* = (r+1)((n_r + 1)/ n_r)
+				# where r is count and n_r is the number of counts seen r times
+
+				new_r = []
+
+				for count in counts_sorted:
+
+					r = count[1]
+
+					# iterate through counts get numnber of counts seen r + 1 times
+					n_r1 = 0
+
+					for count in counts_sorted:
+					 	if count[1] == r+1:
+					 		n_r1 += 1
+					 	elif count[1] == r:
+					 		n_r += 1
+
+					new_r.append((r+1)*((n_r1 +1)/n_r))
+
+				for r in range(len(new_r)):
+					print new_r[r], counts_sorted[r][1]
+
+
+
 
 		else:
 			# add '#' to the beginning and end of text
 			tri_text = '#'+text +'#'
 			# get a list of phones
 			tri_phones = re.findall(r'[A-Z]+|#', tri_text)
+			
+			# implement good turning 
+			if good_turing:
+				print "true"
 
-			if add == 'true':
-				# get list of unique phones for smoothing
-				unique_phones = list(set(tri_phones))
-				for i in range(len(unique_phones)):
-					for j in range(len(unique_phones)):
-						for k in range(len(unique_phones)):
-							bi_tri_counts[unique_phones[i]][unique_phones[j]] += add_var
-							bi_tri_counts[unique_phones[j]][unique_phones[k]] += add_var
-							tri_counts[unique_phones[i]][unique_phones[j]][unique_phones[k]] += add_var
 
 			for i in range(len(tri_phones)-2):
 				bi_tri_counts[tri_phones[i]][tri_phones[i+1]] = bi_tri_counts[tri_phones[i]][tri_phones[i+1]] + 1
@@ -144,7 +193,6 @@ def tri_generate_word():
 # generate probabilities for test file words
 def generate_probabilities():
 	with open(test_file) as test:
-		sigma_log = 0
 		Q = 0
 		for line in test:
 			Q += 1
@@ -157,10 +205,8 @@ def generate_probabilities():
 				# for each phone, update sigma_log and probability
 				for i in range(len(bi_phones)-1):
 					if bi_phones[i] in bigram and bi_phones[i+1] in bigram[bi_phones[i]]:
-						sigma_log += np.log2([bigram[bi_phones[i]][bi_phones[i+1]]])[0]
 						probability += np.log2([bigram[bi_phones[i]][bi_phones[i+1]]])[0]
 					else:
-						sigma_log += np.log2([0])[0]
 						probability += np.log2([0])[0]
 
 				# calculate and print probabilties
@@ -175,15 +221,12 @@ def generate_probabilities():
 				# for each phone, update sigma_log and probability
 				for i in range(len(tri_phones)-2):
 					if tri_phones[i] in trigram and tri_phones[i+1] in trigram[tri_phones[i]] and tri_phones[i+2] in trigram[tri_phones[i]][tri_phones[i+1]]:
-						sigma_log += np.log2([trigram[tri_phones[i]][tri_phones[i+1]][tri_phones[i+2]]])[0]
 						probability += np.log2([trigram[tri_phones[i]][tri_phones[i+1]][tri_phones[i+2]]])[0]
 					else:
-						sigma_log += np.log2([0])[0]
 						probability += np.log2([0])[0]
 
 				# calculate and print probabilties
 				print "p(" + tri_line +") = "+ str(2**probability)
-		print "PP(corpus) = " + str(2**(-1/float(Q)* sigma_log))
 
 def generate_words():
 	if ngram == '2':
@@ -200,9 +243,8 @@ def generate_words():
 
 # Read command line arguments
 
-# when -add1 flag is used
-if '-add1' in sys.argv:
-	add = 'true'
+if '-good_turing' in sys.argv:
+	good_turing = 'true'
 	training_file = sys.argv[2]
 	ngram = sys.argv[3]
 
@@ -212,24 +254,8 @@ if '-add1' in sys.argv:
 		test_file = sys.argv[4]
 		generate_probabilities()
 
-	else: 
-		generate_words()
-
-# when -add_lambda flag is used
-elif '-add_lambda' in sys.argv:
-	add = 'true'
-	add_var = float(sys.argv[2])
-	training_file = sys.argv[3]
-	ngram = sys.argv[4]
-
-	train_data()
-
-	if len(sys.argv) == 6:
-		test_file = sys.argv[5]
-		generate_probabilities()
-
-	else: 
-		generate_words()
+	#else: 
+		#generate_words()
 
 # when no flag is used
 else:
@@ -242,8 +268,8 @@ else:
 		test_file = sys.argv[3]
 		generate_probabilities()
 
-	else:
-		generate_words()
+	#else:
+		#generate_words()
 
 
 
