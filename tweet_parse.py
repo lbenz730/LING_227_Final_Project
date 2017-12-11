@@ -12,6 +12,7 @@ def tweet_parse(file):
 		### Clean Tweet
 		for tweet in tmp:
 			tweet = re.sub("http.*", "", tweet)
+			tweet = re.sub("\n", "", tweet)
 			tweet = re.sub(r"\\", "", tweet)
 			tweet = re.sub(r"/", " ", tweet)
 			try: 
@@ -29,7 +30,7 @@ def clean_tweet(tweet):
 	tokenizer = TweetTokenizer()
 	tweet = tokenizer.tokenize(tweet)
 	tokens = ["<s>"]
-	punct = ["?", ".", "!",".."," "]
+	punct = ["?", ".", "!",".."," ", '"']
 	for i in range(len(tweet)):
 		if tweet[i] in punct:
 			tokens.extend(["</s>", "<s>"])
