@@ -12,6 +12,8 @@ def tweet_parse(file):
 		### Clean Tweet
 		for tweet in tmp:
 			tweet = re.sub("http.*", "", tweet)
+			tweet = re.sub(r"\\", "", tweet)
+			tweet = re.sub(r"/", " ", tweet)
 			try: 
 				" ".join(tokenizer.tokenize(tweet))
 			except UnicodeDecodeError:
@@ -26,22 +28,20 @@ def tweet_parse(file):
 def clean_tweet(tweet):
 	tokenizer = TweetTokenizer()
 	tweet = tokenizer.tokenize(tweet)
-	tweet[0] = "<s>"
-	tweet[len(tweet)-1] = "</s>"
-	tokens = []
-	punct = ["?", ".", "!"]
+	tokens = ["<s>"]
+	punct = ["?", ".", "!",".."," "]
 	for i in range(len(tweet)):
 		if tweet[i] in punct:
 			tokens.extend(["</s>", "<s>"])
 		elif tweet[i] != ",":
 			tokens.extend([tweet[i].lower()])
 
+	tokens.extend(["</s>"])
 	### Remove extra punctuation
 	if len(tokens) > 2:
-		print tokens
+		
 		while (tokens[len(tokens) - 2] == "<s>"):
 			tokens = tokens[:len(tokens) - 2]
 		while (tokens[1] == "</s>"):
 			tokens = tokens[2:]
-
 	return tokens

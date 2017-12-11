@@ -31,7 +31,6 @@ def train_data():
 			tweets = tweet_parse(training_file)
 			for item in tweets:
 				if len(item) > 1:
-					print item
 					item = clean_tweet(item)
 					for i in range(len(item)-1):
 						counts[item[i]] += 1
