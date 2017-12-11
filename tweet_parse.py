@@ -33,13 +33,15 @@ def clean_tweet(tweet):
 	for i in range(len(tweet)):
 		if tweet[i] in punct:
 			tokens.extend(["</s>", "<s>"])
-		elif tweets[i] != ",":
-			tokens.extend([tweet[i]])
+		elif tweet[i] != ",":
+			tokens.extend([tweet[i].lower()])
 
 	### Remove extra punctuation
-	while (tokens[len(tokens) - 2] == "<s>"):
-		tokens = tokens[:len(tokens) - 2]
-	while (tokens[1] == "</s>"):
-		tokens = tokens[2:]
+	if len(tokens) > 2:
+		print tokens
+		while (tokens[len(tokens) - 2] == "<s>"):
+			tokens = tokens[:len(tokens) - 2]
+		while (tokens[1] == "</s>"):
+			tokens = tokens[2:]
 
 	return tokens
