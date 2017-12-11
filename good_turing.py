@@ -51,12 +51,11 @@ def good_turing_counts(sorted_counts, unseen):
 
 	# new counts maps counts to updated good turing counts 
 	new_counts = defaultdict(lambda:0)
-
-	new_counts[0] = count_of_counts[1]/count_of_counts[0]
-
-	for k in range (1, len(count_of_counts.keys())):
+	
+	for k in range (0, len(count_of_counts.keys())):
 		new_counts[k] = ((k+1)*count_of_counts[k+1])/(count_of_counts[k])
 
-	print new_counts[0]
+	for i in range(0, 50):
+		print new_counts[i]
 
 	return new_counts
