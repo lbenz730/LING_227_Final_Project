@@ -5,6 +5,7 @@ import numpy as np
 
 from collections import defaultdict
 from scipy import linalg
+from good_turing import good_turing_counts
 
 # boolean variable for good-turing smoothing:
 good_turing = 'false'
@@ -61,101 +62,9 @@ def train_data():
 				
 				sorted_bicounts.sort(key=lambda x: x[1])
 
-				# get counts of counts with zero for unseen counts
-				count_of_counts = defaultdict(lambda:0)
-				count_of_bicounts = defaultdict(lambda:0)
+				new_counts = good_turing_counts(sorted_counts, 1022000)
 
-				# get count of counts with just seen counts
-				seen_counts = defaultdict(lambda:0)
-				seen_bicounts = defaultdict(lambda:0)
-
-				# number of unseen events = number of words in grammar. There are approximately 1,022,000 words in the english language according to: http://www.telegraph.co.uk/technology/internet/8207621/English-language-has-doubled-in-size-in-the-last-century.html
-				n_0 = 1022000 - len(sorted_counts)
-
-				# number of unseen bigrams = (number of english words)^2 - number of seen bigrams
-				b_0 = 1022000 * 1022000 - len(sorted_bicounts)
-
-				# set the number of unseen counts and bigrams
-				count_of_counts[0] = n_0
-				count_of_bicounts[0] = b_0
-
-				# get count_of_counts and seen_counts 
-				for i in range(1, int(sorted_counts[len(sorted_counts)-1][1])+1):
-
-					count_of_counts[i] = 0
-
-					for count in sorted_counts: 
-						if count[1] == i:
-							seen_counts[i] += 1
-							count_of_counts[i] += 1
-
-				# get count_of_bicounts and seen_bicounts 
-				for i in range(1, int(sorted_bicounts[len(sorted_bicounts)-1][1])+1):
-
-					count_of_bicounts[i] = 0
-
-					for count in sorted_bicounts: 
-						if count[1] == i:
-							seen_bicounts[i] += 1
-							count_of_bicounts[i] += 1
-
-				# build a log function: f(x) = a + blog(x) that maps seen counts to number of seen counts
-				x = np.array(seen_counts.keys())
-				y = np.array(seen_counts.values())
-
-				cons = np.polyfit(np.log(x), y, 1)
-
-				b = cons[0]
-				a = cons[1]
-
-				# build a log function: f(x) = a + blog(x) that maps seen bis to number of seen bis
-				w = np.array(seen_bicounts.keys())
-				z = np.array(seen_bicounts.values())
-
-				cons = np.polyfit(np.log(w), z, 1)
-
-				c = cons[0]
-				d = cons[1]
-
-				# map unseen counts in counts_of_counts using log function
-				for k, v in count_of_counts.iteritems():
-					if v == 0:
-						# computing using function of a, b
-						y = a + (b * np.log([k])[0])
-
-						# prevent -inf 
-						if y < 0:
-							y = 0
-
-						count_of_counts[k] = y
-
-				# map unseen bis in counts_of_bis using log function
-				for k, v in count_of_bicounts.iteritems():
-					if v == 0:
-						# computing using function of a, b
-						y = c + (d * np.log([k])[0])
-
-						# prevent -inf 
-						if y < 0:
-							y = 0
-
-						count_of_bicounts[k] = y
-
-
-				# implement good-turing
-				# use equation c*_k-1 = (k * N_k)/ N_k-1 where c* new count nd N_k is the number of counts equal to k
-
-				# new counts maps counts to updated good turing counts 
-				new_counts = defaultdict(lambda:0)
-
-				for k in range (1, len(count_of_counts.keys())):
-					new_counts[k] = ((k+1)*count_of_counts[k+1])/(count_of_counts[k])
-
-				# new counts maps bigram counts to updated good turing bigram counts
-				new_bis = defaultdict(lambda:0)
-
-				for k in range (1, len(count_of_bicounts.keys())):
-					new_bis[k] = ((k+1)*count_of_bicounts[k+1])/(count_of_bicounts[k])
+				new_bi_counts = good_turing_counts(sorted_bicounts, 1022000 * 1022000)
 
 
 		else:
@@ -189,106 +98,10 @@ def train_data():
 				
 				sorted_bicounts.sort(key=lambda x: x[1])
 
-				# get tricounts of tricounts with zero for unseen tricounts
-				count_on_tricounts = defaultdict(lambda:0)
-				count_of_bicounts = defaultdict(lambda:0)
-
-				# get count of tricounts with just seen tricounts
-				seen_tricounts = defaultdict(lambda:0)
-				seen_bicounts = defaultdict(lambda:0)
-
-				# number of unseen events = number of words in grammar. There are approximately 1,022,000 words in the english language according to: http://www.telegraph.co.uk/technology/internet/8207621/English-language-has-doubled-in-size-in-the-last-century.html
-				n_0 = 1022000 - len(sorted_tricounts)
-
-				# number of unseen bigrams = (number of english words)^2 - number of seen bigrams
-				b_0 = 1022000 * 1022000 - len(sorted_bicounts)
-
-				# set the number of unseen tricounts and bigrams
-				count_on_tricounts[0] = n_0
-				count_of_bicounts[0] = b_0
-
-				# get count_on_tricounts and seen_tricounts 
-				for i in range(1, int(sorted_tricounts[len(sorted_tricounts)-1][1])+1):
-
-					count_on_tricounts[i] = 0
-
-					for count in sorted_tricounts: 
-						if count[1] == i:
-							seen_tricounts[i] += 1
-							count_on_tricounts[i] += 1
-
-				# get count_of_bicounts and seen_bicounts 
-				for i in range(1, int(sorted_bicounts[len(sorted_bicounts)-1][1])+1):
-
-					count_of_bicounts[i] = 0
-
-					for count in sorted_bicounts: 
-						if count[1] == i:
-							seen_bicounts[i] += 1
-							count_of_bicounts[i] += 1
-
-				# build a log function: f(x) = a + blog(x) that maps seen tricounts to number of seen tricounts
-				x = np.array(seen_tricounts.keys())
-				y = np.array(seen_tricounts.values())
-				
-				cons = np.polyfit(np.log(x), y, 1)
-
-				b = cons[0]
-				a = cons[1]
-
-				# build a log function: f(x) = a + blog(x) that maps seen bis to number of seen bis
-				w = np.array(seen_bicounts.keys())
-				z = np.array(seen_bicounts.values())
-
-				cons = np.polyfit(np.log(w), z, 1)
-
-				c = cons[0]
-				d = cons[1]
-
-				# map unseen tricounts in tricounts_on_tricounts using log function
-				for k, v in count_of_tricounts.iteritems():
-					if v == 0:
-						# computing using function of a, b
-						y = a + (b * np.log([k])[0])
-
-						# prevent -inf 
-						if y < 0:
-							y = 0
-
-						count_of_tricounts[k] = y
-
-				# map unseen bis in tricounts_of_bis using log function
-				for k, v in count_of_bicounts.iteritems():
-					if v == 0:
-						# computing using function of a, b
-						y = c + (d * np.log([k])[0])
-
-						# prevent -inf 
-						if y < 0:
-							y = 0
-
-						count_of_bicounts[k] = y
+				new_bicounts = good_turing_counts(sorted_bicounts, 1022000 * 1022000)
+				new_tricounts = good_turing_counts(sorted_tricounts, 1022000 * 1022000 * 1022000)
 
 
-				# implement good-turing
-				# use equation c*_k-1 = (k * N_k)/ N_k-1 where c* new count nd N_k is the number of tricounts equal to k
-
-				# new tricounts maps tricounts to updated good turing tricounts 
-				new_tricounts = defaultdict(lambda:0)
-
-				for k in range (1, len(count_of_tricounts.keys())):
-					new_tricounts[k] = ((k+1)*count_of_tricounts[k+1])/(count_of_tricounts[k])
-
-				# new tricounts maps bigram tricounts to updated good turing bigram tricounts
-				new_bis = defaultdict(lambda:0)
-
-				for k in range (1, len(count_of_bicounts.keys())):
-					new_bis[k] = ((k+1)*count_of_bicounts[k+1])/(count_of_bicounts[k])
-
-
-			for i in range(len(tri_phones)-2):
-				bi_tri_counts[tri_phones[i]][tri_phones[i+1]] = bi_tri_counts[tri_phones[i]][tri_phones[i+1]] + 1
-				tri_counts[tri_phones[i]][tri_phones[i+1]][tri_phones[i+2]] = tri_counts[tri_phones[i]][tri_phones[i+1]][tri_phones[i+2]] + 1
 		build_grams()
 
 def build_grams():
@@ -434,9 +247,3 @@ else:
 
 	#else:
 		#generate_words()
-
-
-
-
-
-
