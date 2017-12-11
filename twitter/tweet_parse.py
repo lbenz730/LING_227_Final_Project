@@ -11,6 +11,7 @@ def tweet_parse(file):
 		tmp = tweet.readlines()
 		### Clean Tweet
 		for tweet in tmp:
+			tweet = re.sub("http.*", "", tweet)
 			try: 
 				" ".join(tokenizer.tokenize(tweet))
 			except UnicodeDecodeError:
@@ -38,5 +39,12 @@ def clean_tweet(tweet):
 	### Remove extra punctuation
 	while (tokens[len(tokens) - 2] == "<s>"):
 		tokens = tokens[:len(tokens) - 2]
+	while (tokens[1] == "</s>"):
+		tokens = tokens[2:]
 
 	return tokens
+
+
+
+tweets = tweet_parse("RoyBlunt.txt")
+print clean_tweet(tweets[10])
