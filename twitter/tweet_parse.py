@@ -43,8 +43,3 @@ def clean_tweet(tweet):
 		tokens = tokens[2:]
 
 	return tokens
-
-
-
-tweets = tweet_parse("RoyBlunt.txt")
-print clean_tweet(tweets[10])
