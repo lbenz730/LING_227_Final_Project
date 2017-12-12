@@ -52,11 +52,15 @@ def train_data():
 			tweets = tweet_parse(training_file)
 			for item in tweets:
 				if len(item) > 1:
-					item = clean_tweet(item)
-					for i in range(len(item)-1):
-						counts[item[i]] += 1
-						bi_counts[item[i]][item[i+1]] += 1
-					counts[item[len(item)-1]] += 1
+					try:
+						item = clean_tweet(item)
+					except IndexError:
+						item = "FAIL"
+					if item != "FAIL":
+						for i in range(len(item)-1):
+							counts[item[i]] += 1
+							bi_counts[item[i]][item[i+1]] += 1
+						counts[item[len(item)-1]] += 1
 
 
 		# implement good turning 
@@ -153,6 +157,7 @@ def generate_probabilities():
 
 	with open(test_file) as test:
 		Q = 0
+		probs = []
 		for line in test:
 			Q += 1
 			if ngram == 2:
@@ -171,6 +176,8 @@ def generate_probabilities():
 
 				# calculate and print probabilties
 				print "p(" + bi_line +") = "+ str(2**probability)
+				probs.extend([str(2**probability)])
+		print ",".join(probs)
 
 
 
