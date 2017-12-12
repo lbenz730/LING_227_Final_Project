@@ -1,0 +1,35 @@
+Presidential Corpus
+1. Barack Obama
+2. JFK
+3. Richard Nixon
+4. FDR
+5. George Washington
+6. Thomas Jefferson
+7. Donald Trump
+8. Abe Lincoln
+9. Bill Clinton
+10. Woodrow Wilson
+
+POS Tags
+1. Barack Obama
+2. JFK
+3. Richard Nixon
+4. FDR
+5. George Washington
+6. Thomas Jefferson
+7. Donald Trump
+8. Abe Lincoln
+9. Bill Clinton
+10. Woodrow Wilson
+
+Tweets
+1. Barack Obama
+2. Donald Trump
+3. Ted Cruz
+4. Bernie Sanders
+5. Tim Kaine
+6. Elizabeth Warren
+7. Lisa Murkowski
+8. Marco Rubio
+9. Mike Lee
+10. Chuck Schumer
