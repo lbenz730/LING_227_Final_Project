@@ -8,24 +8,27 @@ import sys
 # no punctuation
 
 def speech_parse(file):
-	with open(sys.argv[1] +'/' + file) as f:
-		lines = f.readlines()
-		text = []
-		del lines[0:2]
-		for line in lines:
-			line = re.sub("---", "", line)
-			line = re.sub("--", " ", line)
-			line = re.sub("-", " ", line)
-		        tokenized = nltk.word_tokenize(line)
-			text.append(tokenized)
-		
-#def clean_speech(lines):
+    with open(sys.argv[1] +'/' + file) as f:
+        lines = f.readlines()
+        text = []
+        del lines[0:2]
+        for line in lines:
+                line = re.sub("---", "", line)
+                line = re.sub("--", " ", line)
+                line = re.sub("-", " ", line)
+                tokenized = nltk.word_tokenize(line)
+                text.append(tokenized)
+            
+def clean_speech(lines):
+   
+    print lines 
 
 
-for filename in os.listdir(sys.argv[1]):
+def dir_parse():
+    for filename in os.listdir(sys.argv[1]):
 	if filename.endswith(".txt"): 
-		speech_parse(filename)
+	    speech_parse(filename)
 	else:
-		continue
+	    continue
 
 
