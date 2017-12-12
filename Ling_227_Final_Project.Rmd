@@ -19,7 +19,7 @@ History remembers great speakers for their idiosyncracies. From JFK's authentici
 Speeches from each of the 44 presidents and 2016 Democratic Nominee Hillary Clinton were obtained from on open source online corpus compiled by [The Grammar Lab](http://www.thegrammarlab.com/?nor-portfolio=corpus-of-presidential-speeches-cops-and-a-clintontrump-corpus). Tweets from Presidents Donald Trump and Barack Obama and various Senators were collected from [data made public by FiveThirtyEight](https://github.com/fivethirtyeight/data/tree/master/twitter-ratio).
 
 ### Data Cleaning
-Tweets were parsed and tokenized before using the model. All words were lowercased so that various capitalization wouldn't affect the results. All punctuation (including commas) was removed from tweets and was replaced with beginning and end of sentence speech tags (\<s\> and \</s\>). Given that tweets can be quoted (in the form of a hyperlink to said tweet), everything after (and including) the text pattern "http" was removed when such a pattern appeared in a tweet. Additionally, Twitter offers users the option to share or "Retweet" posts that other users have made. Since retweets, indicated in our corpus by RT, aren't necessarily direct words from a given user, all retweets were removed from the training corpus. When all is said and done, this tweet ![test](twitter/Trump_Tweet.png) is represented as follows:
+Tweets were parsed and tokenized before using the model. All words were lowercased so that various capitalization wouldn't affect the results. All punctuation (including commas) was removed from tweets and was replaced with beginning and end of sentence speech tags (\<s\> and \</s\>). Given that tweets can be quoted (in the form of a hyperlink to said tweet), everything after (and including) the text pattern "http" was removed when such a pattern appeared in a tweet. Additionally, Twitter offers users the option to share or "Retweet" posts that other users have made. Since retweets, indicated in our corpus by RT, aren't necessarily direct words from a given user, all retweets were removed from the training corpus. When all is said and done, this tweet ![Example quote from \@realDonaldTrump](twitter/Trump_Tweet.png) is represented as follows:
 
 ['\<s\>', u'\@nfl', u':', u'too', u'much', u'talk', u'not', u'enough', u'action', '\</s\>', '\<s\>', u'stand', u'for', u'the', u'national', u'anthem', '\</s\>']
 
@@ -56,9 +56,42 @@ $$
 
 # Results
 ## Presidential Speech Corpus
+The probilities of each of the following presidential quotes were computed using the relavent speakers speechs as training files for the bigram model.
+
+* Quote 1: \<s\> yes we can \</s\> - Barack Obama
+* Quote 2: \<s\> and so my fellow Americans ask not what your country can do for you ask what you can do for your country \</s\> - JFK
+* Quote 3: \<s\> when the president does it that means that it is not illegal \</s\> - Richard Nixon
+* Quote 4: \<s\> the only thing we have to fear is fear itself \</s\> - FDR
+* Quote 5: \<s\> liberty when it begins to take root is a plant of rapid growth \</s\> - George Washington
+* Quote 6: \<s\> the care of human life and happiness and not their destruction is the first and only object of good government \</s\> - Thomas Jefferson
+* Quote 7: \<s\> make america great again \</s\> -Donald Trump
+* Quote 8: \<s\> a house divided against itself cannot stand \</s\> - Abraham Lincoln
+* Quote 9: \<s\> we must teach our children to resolve their conflicts with words not weapons \</s\> - Bill Clinton
+* Quote 10: \<s\> i would rather belong to a poor nation that was free than to a rich nation that had ceased to be in love with liberty \</s\> -Woodrow Wilson
 
 ## Part of Speech Tags
 
 ## Tweet Data
+The probilities of each of the following tweets were computed using the relavent speakers' twitter history as training files for the bigram model.
+
+* Quote 1: \<s\> yes we can \</s\> - Barack Obama
+* Quote 2: \<s\> make america great again \</s\> - Donald Trump
+* Quote 3 \<s\> stark reminder of the threat radical islamic terror still poses to our homeland \</s\> -Ted Cruz
+* Quote 4: \<s\> it's not by giving massive tax breaks to your billionaire friends \</s\> - Bernie Sanders
+* Quote 5: \<s\> tax bill equals swamp creature \</s\> - Tim Kaine
+* Quote 6: \<s\> @SenBernieSanders & I are talking about things democrats are fighting for in this spending bill that would make a big difference to working families \</s\> - Elizabeth Warren
+* Quote 7: \<s\> whether you are in the media politics or anywhere else abuse of power is unacceptable & shouldn’t be tolerated at any place at any level \</s\> - Lisa Murkowski
+* Quote 8: \<s\> in a foreign relations committee hearing today i discussed how u.S. nuclear forces protect our nation and allies in the 21st century \</s\> - Marco Rubio
+* Quote 9: \<s\> president trump did the people of utah a great favor today by rolling back harmful land use restrictions in southern utah \#utpol  \</s\> - Mike Lee
+* Quote 10: \<s\> better \#GetCovered it’s the last weekend to sign up for 2018 health coverage before the 12/15 deadline \</s\> - Chuck Schumer
+
+Probability outputs for each speaker on each of the ten quotes are shown below in Figure 3. Overall, the model correctly identified 5/10 (50%) of the people who said these tweets. The most likely tweet-speaker pair was Donald Trump "Make America Great Again". Interestingly, this combination was over 10,000,000,000 times more likely any other combination! While some of this discrepancy can be expained by the fact that it is a shorter tweet, it also speaks to the unprescedented manner in which President Trump uses Twitter compared to other politicians.
+
+![Tweet Results](tweet_results.png)
+
+
+
+
+
 
 # Discussion
