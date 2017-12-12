@@ -12,6 +12,17 @@ from tweet_parse import tweet_parse, clean_tweet
 good_turing = 'false'
 tweet = 'false'
 
+global counts
+global bi_counts
+global bi_tri_counts 
+global tri_counts 
+
+#set up dictionaries for new counts
+global new_counts
+global new_bicounts
+global new_bitricounts
+global new_tricounts
+
 
 # set up dictionaries
 counts = defaultdict(lambda:0)
@@ -21,9 +32,9 @@ tri_counts = defaultdict(lambda:defaultdict(lambda:defaultdict(lambda:0)))
 
 #set up dictionaries for new counts
 new_counts = defaultdict(lambda:0) 
-new_bicounts = defaultdict(lambda:defaultdict(lambda:0))
-new_bitricounts = defaultdict(lambda:defaultdict(lambda:0))
-new_tricounts = defaultdict(lambda:defaultdict(lambda:defaultdict(lambda:0)))
+new_bicounts = defaultdict(lambda:0)
+new_bitricounts = defaultdict(lambda:0)
+new_tricounts = defaultdict(lambda:0)
 
 bigram = defaultdict(lambda:{})
 trigram = defaultdict(lambda:defaultdict(lambda:{}))
@@ -31,6 +42,10 @@ trigram = defaultdict(lambda:defaultdict(lambda:{}))
 # open language file and increment counts 
 def train_data():
 
+	global new_counts
+	global new_bicounts
+	global new_bitricounts
+	global new_tricounts
 
 	if ngram == 2:
 		if tweet:
@@ -44,7 +59,6 @@ def train_data():
 					counts[item[len(item)-1]] += 1
 
 
-
 		# implement good turning 
 		if good_turing:
 			
@@ -56,15 +70,12 @@ def train_data():
 			for i in bi_counts:
 				for j in bi_counts[i]:
 					sorted_bicounts.append((i+j,bi_counts[i][j]))
-
-			print sorted_counts
-			print sorted_bicounts
 			
 			sorted_bicounts.sort(key=lambda x: x[1])
 
-			new_counts = good_turing_counts(sorted_counts, 1022000)
+			new_counts = good_turing_counts(sorted_counts, 102200)
 
-			new_bicounts = good_turing_counts(sorted_bicounts, 1022000 * 1022000)
+			new_bicounts = good_turing_counts(sorted_bicounts, 102200)
 
 
 		else:
@@ -105,19 +116,24 @@ def train_data():
 		build_grams()
 
 def build_grams():
+
+	global new_counts
+	global new_bicounts
+	global new_bitricounts
+	global new_tricounts
+
 	# compute relative frequency estimates for word pairs and triples
-	if ngram == '2':
+	if ngram == 2:
 		for phone1 in counts:
 			for phone2 in bi_counts[phone1]:
 
-				count = 0
-				bi_count = 0
-
-				if good_turing:	
+				if good_turing:
 
 					# get updated new count 
-					count = float(new_counts[float(counts[phone1])])
-					bi_count = float(new_bicounts[float(bi_counts[phone1][phone2])])
+					count = float(new_counts[(counts[phone1])])
+					bi_count = float(new_bicounts[bi_counts[phone1][phone2]])
+
+
 
 				else:
 					count = float(counts[phone1])
@@ -125,127 +141,37 @@ def build_grams():
 
 
 				bigram[phone1][phone2] = bi_count/count
-				#print "P(" + phone2 + " | " + phone1 + ")\tis\t" + str(bigram[phone1][phone2])
-	else:
-		for phone1 in tri_counts:
-			for phone2 in tri_counts[phone1]:
-				for phone3 in tri_counts[phone1][phone2]:
 
-					bi_count = 0
-					tri_count = 0
-
-					if good_turing:
-
-						# get updated new count
-						bi_count = float(new_bitricounts[float(bi_tri_counts[phone1][phone2])])
-						tri_count = float(new_tricounts[float(tri_counts[phone1][phone2][phone3])])
-
-					else:
-
-						bi_count = float(bi_tri_counts[phone1][phone2])
-						tri_count = float(tri_counts[phone1][phone2][phone3])
-
-					trigram[phone1][phone2][phone3] = tri_count/bi_count
-					#print "P(" + phone3 + " | " + phone1 +','+ phone2 + ")\tis\t" + str(trigram[phone1][phone2][phone3])
-
-# bin method to generate random phones
-def bi_generate_phone(phone):
-	rand = random.uniform(0,1)
-	# go through each possible second phone
-	for next_phone in bigram[phone]:
-		# subtract the  probability of the phone from rand 
-		rand -= bigram[phone][next_phone]
-		# phone for bin is found when zero is crossed
-		if rand < 0.0: return next_phone
-	return next_phone
-
-
-def tri_generate_phone(phone1, phone2):
-	rand = random.uniform(0,1)
-	# go through each possible 3 second phone
-	for next_phone in trigram[phone1][phone2]:
-		# subtract the  probability of the phone from rand 
-		rand -= trigram[phone1][phone2][next_phone]
-		# phone for bin is found when zero is crossed
-		if rand < 0.0: return next_phone
-	return next_phone
-
-
-# keeps generating words until '#'' is randomly generated, then returns the whole word
-def bi_generate_word():
-	word = "#"
-	current = ''
-	while current is not '#':
-		if current == '': current = '#'
-		current = bi_generate_phone(current)
-		word += " " + current
-	return word
-
-# keeps generating words until '# #' is randomly generated, then returns the whole word
-def tri_generate_word():
-	word = "#"
-	first = ''
-	second = ''
-	while second is not '#':
-		if first == '': 
-			first = '#'
-			second = '#'
-		word += " " + second
-		buff = second
-		second = tri_generate_phone(first, second)
-		first = buff
-	word += " " + '# #'
-	return word
 
 # generate probabilities for test file words
 def generate_probabilities():
+
+	global new_counts
+	global new_bicounts
+	global new_bitricounts
+	global bigram
+
 	with open(test_file) as test:
 		Q = 0
 		for line in test:
 			Q += 1
-			if ngram == '2':
-				bi_line = "# " + line.strip() + " #"
+			if ngram == 2:
+				bi_line =  line.strip() 
 				bi_phones = re.split(r'\s', bi_line)
 
 				probability = 0
 
 				# for each phone, update sigma_log and probability
 				for i in range(len(bi_phones)-1):
+
 					if bi_phones[i] in bigram and bi_phones[i+1] in bigram[bi_phones[i]]:
 						probability += np.log2([bigram[bi_phones[i]][bi_phones[i+1]]])[0]
 					else:
-						probability += np.log2([0])[0]
+						probability += np.log2([new_bicounts[0]])[0]
 
 				# calculate and print probabilties
 				print "p(" + bi_line +") = "+ str(2**probability)
 
-			else:
-				tri_line = "# # " + line.strip() + " # #"
-				tri_phones = re.split(r'\s', tri_line)
-
-				probability = 0
-
-				# for each phone, update sigma_log and probability
-				for i in range(len(tri_phones)-2):
-					if tri_phones[i] in trigram and tri_phones[i+1] in trigram[tri_phones[i]] and tri_phones[i+2] in trigram[tri_phones[i]][tri_phones[i+1]]:
-						probability += np.log2([trigram[tri_phones[i]][tri_phones[i+1]][tri_phones[i+2]]])[0]
-					else:
-						probability += np.log2([0])[0]
-
-				# calculate and print probabilties
-				print "p(" + tri_line +") = "+ str(2**probability)
-
-def generate_words():
-	if ngram == '2':
-		# print 25 random 'words' using the bigram
-		for i in range(25):
-			print bi_generate_word()
-	elif ngram == '3':
-		# print 25 random 'words' using the trigram
-		for i in range(25):
-			print tri_generate_word()
-	else:
-		"Error: N-gram not supported"
 
 
 # Read command line arguments
@@ -263,9 +189,6 @@ ngram = int(sys.argv[2])
 
 train_data()
 
-if len(sys.argv) == 5:
-	test_file = sys.argv[4]
+if len(sys.argv) == 4:
+	test_file = sys.argv[3]
 	generate_probabilities()
-
-	#else: 
-		#generate_words()

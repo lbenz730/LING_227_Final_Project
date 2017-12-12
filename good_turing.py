@@ -38,10 +38,10 @@ def good_turing_counts(sorted_counts, unseen):
 	for k, v in count_of_counts.iteritems():
 		if v == 0:
 			# computing using function of a, b
-			f = a + (b * np.log([k])[0])
+			f = a + (b * np.log([k+1])[0])
 
 			# prevent -inf 
-			if f < 0:
+			if f <= 0:
 				f = 1
 
 			count_of_counts[k] = f
@@ -52,10 +52,13 @@ def good_turing_counts(sorted_counts, unseen):
 	# new counts maps counts to updated good turing counts 
 	new_counts = defaultdict(lambda:0)
 	
-	for k in range (0, len(count_of_counts.keys())):
-		new_counts[k] = ((k+1)*count_of_counts[k+1])/(count_of_counts[k])
+	for k in range (len(count_of_counts.keys())):
 
-	for i in range(0, 50):
-		print new_counts[i]
+		new_count = ((k+1)*count_of_counts[k+1])/(count_of_counts[k])
+
+		if new_count < 0.0000000001:
+			new_count = 0.0000000001
+
+		new_counts[k] = new_count
 
 	return new_counts
