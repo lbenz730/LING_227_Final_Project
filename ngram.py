@@ -19,6 +19,12 @@ bi_counts = defaultdict(lambda:defaultdict(lambda:0))
 bi_tri_counts = defaultdict(lambda:defaultdict(lambda:0))
 tri_counts = defaultdict(lambda:defaultdict(lambda:defaultdict(lambda:0)))
 
+#set up dictionaries for new counts
+new_counts = defaultdict(lambda:0) 
+new_bicounts = defaultdict(lambda:defaultdict(lambda:0))
+new_bitricounts = defaultdict(lambda:defaultdict(lambda:0))
+new_tricounts = defaultdict(lambda:defaultdict(lambda:defaultdict(lambda:0)))
+
 bigram = defaultdict(lambda:{})
 trigram = defaultdict(lambda:defaultdict(lambda:{}))
 
@@ -58,7 +64,7 @@ def train_data():
 
 			new_counts = good_turing_counts(sorted_counts, 1022000)
 
-			new_bi_counts = good_turing_counts(sorted_bicounts, 1022000 * 1022000)
+			new_bicounts = good_turing_counts(sorted_bicounts, 1022000 * 1022000)
 
 
 		else:
@@ -92,7 +98,7 @@ def train_data():
 				
 				sorted_bicounts.sort(key=lambda x: x[1])
 
-				new_bicounts = good_turing_counts(sorted_bicounts, 1022000 * 1022000)
+				new_bitricounts = good_turing_counts(sorted_bicounts, 1022000 * 1022000)
 				new_tricounts = good_turing_counts(sorted_tricounts, 1022000 * 1022000 * 1022000)
 
 
@@ -103,13 +109,43 @@ def build_grams():
 	if ngram == '2':
 		for phone1 in counts:
 			for phone2 in bi_counts[phone1]:
-				bigram[phone1][phone2] = float(bi_counts[phone1][phone2])/float(counts[phone1])
+
+				count = 0
+				bi_count = 0
+
+				if good_turing:	
+
+					# get updated new count 
+					count = float(new_counts[float(counts[phone1])])
+					bi_count = float(new_bicounts[float(bi_counts[phone1][phone2])])
+
+				else:
+					count = float(counts[phone1])
+					bi_count = float(bi_counts[phone1][phone2])
+
+
+				bigram[phone1][phone2] = bi_count/count
 				#print "P(" + phone2 + " | " + phone1 + ")\tis\t" + str(bigram[phone1][phone2])
 	else:
 		for phone1 in tri_counts:
 			for phone2 in tri_counts[phone1]:
 				for phone3 in tri_counts[phone1][phone2]:
-					trigram[phone1][phone2][phone3] = float(tri_counts[phone1][phone2][phone3])/float(bi_tri_counts[phone1][phone2])
+
+					bi_count = 0
+					tri_count = 0
+
+					if good_turing:
+
+						# get updated new count
+						bi_count = float(new_bitricounts[float(bi_tri_counts[phone1][phone2])])
+						tri_count = float(new_tricounts[float(tri_counts[phone1][phone2][phone3])])
+
+					else:
+
+						bi_count = float(bi_tri_counts[phone1][phone2])
+						tri_count = float(tri_counts[phone1][phone2][phone3])
+
+					trigram[phone1][phone2][phone3] = tri_count/bi_count
 					#print "P(" + phone3 + " | " + phone1 +','+ phone2 + ")\tis\t" + str(trigram[phone1][phone2][phone3])
 
 # bin method to generate random phones
