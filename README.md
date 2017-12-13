@@ -10,28 +10,20 @@ pip install nltk
 ```
 ### Running the Bigram Language Model 
 
-To parse and clean the tweets:
+To parse and clean the tweets, look at tweet_parse.py. It parses a directory for all the .txt files and returns a list of all cleaned and parsed sentences from all the tweets.
+
+To parse and clean the speeches, look at tok.py. It parses a directory for all the .txt files and returns a list of all cleaned and parsed sentences from all the speeches.
+
+To smooth bigram model with good turing smooth, look at good_turing.py. It applies good_turing smoothing using a logarithmic function. 
+
+
+To train model and find probabilities of sentences using tweets:
 
 ```
-python tweet_parse DIR
-```
-tweet_parse.py parses a directory for all the .txt files and returns a list of all cleaned and parsed sentences from all the tweets.
-
-To parse and clean the speeches:
-
-```
-python tok.py DIR
+python ngram.py -good_turing -tweet TWEET.txt 2 tweet_quotes.txt
 ```
 
-tok.py parses a directory for all the .txt files and returns a list of all cleaned and parsed sentences from all the speeches.
-
-To smooth bigram model with good turing smooth:
-
-```
-python good_turing.py
-```
-
-To train model and find probabilities of sentences:
+To train model and find probabilities of sentences using speeches:
 
 ```
 python ngram.py -good_turing -speech DIR 2 presidential_quotes.txt
