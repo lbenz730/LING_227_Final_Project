@@ -30,8 +30,11 @@ python ngram.py -good_turing -speech DIR 2 presidential_quotes.txt
 ```
 
 ## Results
-
+For the tweets:
 ![alt text](https://github.com/lbenz730/LING_227_Final_Project/blob/master/tweet_results.png)
+
+For the speeches:
+![alt text](https://github.com/lbenz730/LING_227_Final_Project/blob/master/presidential_results.png)
 
 ## Authors
 
