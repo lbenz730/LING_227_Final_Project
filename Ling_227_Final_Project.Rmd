@@ -147,4 +147,5 @@ The fact that our accuracy is relatively low is not surpirsing given the simplic
 - Mosteller, F. and D. L. Wallace. _Inference and Disputed Authorship: The Federalist_. Reading, MA., 1964
 -Zheng, R., Li, J., Chen, H. and Huang, Z. _A framework for authorship identification of online messages: Writing-style features and classification techniques_. J. Am. Soc. Inf. Sci., 57: 378–393, 2006.
 
-
+# Apendix
+Code for this project can be [found on GitHub](https://github.com/lbenz730/LING_227_Final_Project).
