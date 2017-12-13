@@ -69,7 +69,23 @@ The probilities of each of the following presidential quotes were computed using
 * Quote 9: \<s\> we must teach our children to resolve their conflicts with words not weapons \</s\> - Bill Clinton
 * Quote 10: \<s\> i would rather belong to a poor nation that was free than to a rich nation that had ceased to be in love with liberty \</s\> -Woodrow Wilson
 
+Probability outputs for each speaker on each of the ten quotes are shown below in Figure 1. Overall, the model correctly identified 2/10 (50%) of the people who said these tweets. The two speakers that the model identified correctly were Barack Obama (quote 1) and Donald Trump (quote 7). Given that our model attributed 7 quotes to either Trump or Obama, this may be the result of larger training corupuses for these two presidents. For earlier presidents, our corpus contains fewer speeches than for more recent presidents. We have 50 Obama speeches in our data set compared to only 21 for George Washinton. Using more data for recent presidents likely yields fewer unseen bigrams, and thus higher probabilities. The most likely quote-speaker pair was Donald Trump "Make America Great Again", nearly 1000 times more probable than Obama's famous "Yes we Can!" slogan.
+
+![Presidential Quote Results](president_results.png)
+
 ## Part of Speech Tags
+The probilities of each of the following presidential quotes in POS tag form were computed using the relavent speakers speechs as training files for the bigram model.
+
+* Quote 1: <s> ADV PRON VERB </s> - Barack Obama
+* Quote 2: <s> CONJ ADV DET NOUN PRT VERB ADV DET DET NOUN VERB VERB ADP PRON VERB DET PRON VERB VERB ADP DET NOUN </s> - JFK
+* Quote 3: <s> ADV DET NOUN VERB PRON ADP NOUN ADP PRON VERB ADV ADJ </s> - Richard Nixon
+* Quote 4: <s> DET ADJ NOUN PRON VERB PRT VERB VERB VERB PRON </s> - FDR
+* Quote 5: <s> NOUN ADV PRON VERB PRT VERB PRT VERB DET NOUN ADP ADJ NOUN </s> - George Washington
+* Quote 6: <s> DET NOUN ADP ADJ NOUN CONJ NOUN CONJ ADV DET NOUN VERB DET ADJ CONJ ADJ NOUN ADP ADJ NOUN </s>
+* Quote 7: <s> VERB NOUN ADJ ADV </s>
+* Quote 8: <s> DET NOUN VERB ADP PRON VERB NOUN </s>
+* Quote 9: <s> PRON VERB VERB DET NOUN PRT VERB DET NOUN ADP NOUN ADV NOUN </s> - Bill Clinton
+* Quote 10 <s> PRON VERB ADV VERB ADP DET ADJ NOUN PRON VERB ADJ ADP ADP DET ADJ NOUN PRON VERB VERB PRT VERB ADP VERB ADP NOUN </s> 
 
 ## Tweet Data
 The probilities of each of the following tweets were computed using the relavent speakers' twitter history as training files for the bigram model.
