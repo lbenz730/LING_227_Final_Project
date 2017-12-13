@@ -9,9 +9,9 @@ from good_turing import good_turing_counts
 from tweet_parse import tweet_parse, clean_tweet
 from tok import *
 # boolean variable for good-turing smoothing:
-good_turing = 'false'
-tweet = 'false'
-speech = 'false'
+good_turing = False
+tweet = False
+speech = False
 
 global counts
 global bi_counts
@@ -64,18 +64,12 @@ def train_data():
 						counts[item[len(item)-1]] += 1
 
 	        if speech:
-			speeches = speech_parse(training_file)
+			speeches = parse(training_file)
 			for item in speeches:
-				if len(item) > 1:
-					try:
-						item = clean_speech(item)
-					except IndexError:
-						item = "FAIL"
-					if item != "FAIL":
-						for i in range(len(item)-1):
-							counts[item[i]] += 1
-							bi_counts[item[i]][item[i+1]] += 1
-						counts[item[len(item)-1]] += 1
+                            for i in range(len(item)-1):
+                                    counts[item[i]] += 1
+                                    bi_counts[item[i]][item[i+1]] += 1
+                            counts[item[len(item)-1]] += 1
 
 
 		# implement good turning 
@@ -200,21 +194,21 @@ def generate_probabilities():
 if '-good_turing' in sys.argv:
 
 	sys.argv.remove('-good_turing')
-	good_turing = 'true'
+	good_turing = True
 
 	if '-tweet' in sys.argv:
-		tweet = 'true'
+		tweet = True
 		sys.argv.remove('-tweet')
 
         if '-speech' in sys.argv:
-        	speech = 'true'
+        	speech = True
 		sys.argv.remove('-speech')
-
 
 training_file = sys.argv[1]
 ngram = int(sys.argv[2])
 
 train_data()
+
 
 if len(sys.argv) == 4:
 	test_file = sys.argv[3]

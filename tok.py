@@ -4,10 +4,13 @@ import nltk.tokenize
 import os 
 import sys
 
+reload(sys)
+sys.setdefaultencoding('utf8')
+
 # no punctuation
 
-def speech_parse(file):
-    with open(sys.argv[1] +'/' + file) as f:
+def speech_parse(file, dir):
+    with open(dir +'/' + file) as f:
         lines = f.readlines()
         text = []
         del lines[0:2]
@@ -37,19 +40,26 @@ def clean_speech(lines):
 	    tokens.extend([line[i].lower()])
     tokens.extend(["</s>"])
     if len(tokens) > 2:
-	while (tokens[len(tokens) - 2] == "<s>"):
-	    tokens = tokens[:len(tokens) - 2]
-	while (tokens[1] == "</s>"):
-	    tokens = tokens[2:]
+        try:
+            while (tokens[len(tokens) - 2] == "<s>"):
+	        tokens = tokens[:len(tokens) - 2]
+	    while (tokens[1] == "</s>"):
+	        tokens = tokens[2:]
+        except(IndexError):
+            return tokens
     return tokens
  
+def parse(dir):
+    arr = list()
+    for filename in os.listdir(dir):
+        if filename.endswith(".txt"): 
+            for i in speech_parse(filename,dir):
+                parse = clean_speech(i) 
+                if len(parse) > 2:
+                    arr.append(parse)
+        else:
+            print "Usage: python tok.py directory"
+    return arr
 
-for filename in os.listdir(sys.argv[1]):
-    if filename.endswith(".txt"): 
-	for i in speech_parse(filename):
-            parse = clean_speech(i) 
-            if len(parse) > 2:
-                print parse
-    else:
-   	print "Usage: python tok.py directory"	
+
 
