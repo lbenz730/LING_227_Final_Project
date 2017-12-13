@@ -29,12 +29,18 @@ To train model and find probabilities of sentences using speeches:
 python ngram.py -good_turing -speech DIR 2 presidential_quotes.txt
 ```
 
+To use the Hidden Markov Model on the tweets/speeches:
+
+```
+python hmm.py FILE
+```
+
 ## Results
 For the tweets:
 ![alt text](https://github.com/lbenz730/LING_227_Final_Project/blob/master/tweet_results.png)
 
 For the speeches:
-![alt text](https://github.com/lbenz730/LING_227_Final_Project/blob/master/presidential_results.png)
+![alt text](https://github.com/lbenz730/LING_227_Final_Project/blob/master/president_results.png)
 
 ## Authors
 
