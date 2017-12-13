@@ -7,10 +7,12 @@ from collections import defaultdict
 from scipy import linalg
 from good_turing import good_turing_counts
 from tweet_parse import tweet_parse, clean_tweet
+from tok import *
 
 # boolean variable for good-turing smoothing:
-good_turing = 'false'
-tweet = 'false'
+good_turing = False
+tweet = False
+speech = False
 
 global counts
 global bi_counts
@@ -52,11 +54,23 @@ def train_data():
 			tweets = tweet_parse(training_file)
 			for item in tweets:
 				if len(item) > 1:
-					item = clean_tweet(item)
-					for i in range(len(item)-1):
-						counts[item[i]] += 1
-						bi_counts[item[i]][item[i+1]] += 1
-					counts[item[len(item)-1]] += 1
+					try:
+						item = clean_tweet(item)
+	 				except IndexError:
+	 						item = "FAIL"
+	 				if item != "FAIL":
+	 					for i in range(len(item)-1):
+	 						counts[item[i]] += 1
+	 						bi_counts[item[i]][item[i+1]] += 1
+	 					counts[item[len(item)-1]] += 1
+
+ 		if speech:
+ 			speeches = parse(training_file)
+ 			for item in speeches:
+ 				for i in range(len(item)-1):
+ 					counts[item[i]] += 1
+ 					bi_counts[item[i]][item[i+1]] += 1
+ 				counts[item[len(item)-1]] += 1
 
 
 		# implement good turning 
@@ -153,6 +167,7 @@ def generate_probabilities():
 
 	with open(test_file) as test:
 		Q = 0
+		probs = []
 		for line in test:
 			Q += 1
 			if ngram == 2:
@@ -171,6 +186,8 @@ def generate_probabilities():
 
 				# calculate and print probabilties
 				print "p(" + bi_line +") = "+ str(2**probability)
+				probs.extend([str(2**probability)])	
+		print ",".join(probs)
 
 
 
@@ -178,11 +195,14 @@ def generate_probabilities():
 if '-good_turing' in sys.argv:
 
 	sys.argv.remove('-good_turing')
-	good_turing = 'true'
+	good_turing = True
 
 	if '-tweet' in sys.argv:
-		tweet = 'true'
+		tweet = True
 		sys.argv.remove('-tweet')
+	if '-speech' in sys.argv:
+		speech = True
+		sys.argv.remove('-speech')
 
 training_file = sys.argv[1]
 ngram = int(sys.argv[2])

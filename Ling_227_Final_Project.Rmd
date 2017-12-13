@@ -104,11 +104,11 @@ The probilities of each of the following presidential quotes in POS tag form wer
 * Quote 3: <s> ADV DET NOUN VERB PRON ADP NOUN ADP PRON VERB ADV ADJ </s> - Richard Nixon
 * Quote 4: <s> DET ADJ NOUN PRON VERB PRT VERB VERB VERB PRON </s> - FDR
 * Quote 5: <s> NOUN ADV PRON VERB PRT VERB PRT VERB DET NOUN ADP ADJ NOUN </s> - George Washington
-* Quote 6: <s> DET NOUN ADP ADJ NOUN CONJ NOUN CONJ ADV DET NOUN VERB DET ADJ CONJ ADJ NOUN ADP ADJ NOUN </s>
-* Quote 7: <s> VERB NOUN ADJ ADV </s>
-* Quote 8: <s> DET NOUN VERB ADP PRON VERB NOUN </s>
+* Quote 6: <s> DET NOUN ADP ADJ NOUN CONJ NOUN CONJ ADV DET NOUN VERB DET ADJ CONJ ADJ NOUN ADP ADJ NOUN </s> - Thomas Jefferson
+* Quote 7: <s> VERB NOUN ADJ ADV </s> - Donald Trump
+* Quote 8: <s> DET NOUN VERB ADP PRON VERB NOUN </s> - Abe Lincoln
 * Quote 9: <s> PRON VERB VERB DET NOUN PRT VERB DET NOUN ADP NOUN ADV NOUN </s> - Bill Clinton
-* Quote 10 <s> PRON VERB ADV VERB ADP DET ADJ NOUN PRON VERB ADJ ADP ADP DET ADJ NOUN PRON VERB VERB PRT VERB ADP VERB ADP NOUN </s> 
+* Quote 10 <s> PRON VERB ADV VERB ADP DET ADJ NOUN PRON VERB ADJ ADP ADP DET ADJ NOUN PRON VERB VERB PRT VERB ADP VERB ADP NOUN </s> - Woodrow Wilson
 
 ## Tweet Data
 The probilities of each of the following tweets were computed using the relavent speakers' twitter history as training files for the bigram model.
