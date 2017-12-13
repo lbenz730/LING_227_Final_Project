@@ -29,6 +29,10 @@ To train model and find probabilities of sentences using speeches:
 python ngram.py -good_turing -speech DIR 2 presidential_quotes.txt
 ```
 
+## Results
+
+![alt text](https://github.com/lbenz730/LING_227_Final_Project/blob/master/tweet_results.png)
+
 ## Authors
 
 * **Luke Benz** - (https://github.com/lbenz730)
