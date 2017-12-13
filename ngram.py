@@ -7,10 +7,11 @@ from collections import defaultdict
 from scipy import linalg
 from good_turing import good_turing_counts
 from tweet_parse import tweet_parse, clean_tweet
-
+from tok import *
 # boolean variable for good-turing smoothing:
 good_turing = 'false'
 tweet = 'false'
+speech = 'false'
 
 global counts
 global bi_counts
@@ -54,6 +55,20 @@ def train_data():
 				if len(item) > 1:
 					try:
 						item = clean_tweet(item)
+					except IndexError:
+						item = "FAIL"
+					if item != "FAIL":
+						for i in range(len(item)-1):
+							counts[item[i]] += 1
+							bi_counts[item[i]][item[i+1]] += 1
+						counts[item[len(item)-1]] += 1
+
+	        if speech:
+			speeches = speech_parse(training_file)
+			for item in speeches:
+				if len(item) > 1:
+					try:
+						item = clean_speech(item)
 					except IndexError:
 						item = "FAIL"
 					if item != "FAIL":
@@ -190,6 +205,11 @@ if '-good_turing' in sys.argv:
 	if '-tweet' in sys.argv:
 		tweet = 'true'
 		sys.argv.remove('-tweet')
+
+        if '-speech' in sys.argv:
+        	speech = 'true'
+		sys.argv.remove('-speech')
+
 
 training_file = sys.argv[1]
 ngram = int(sys.argv[2])
