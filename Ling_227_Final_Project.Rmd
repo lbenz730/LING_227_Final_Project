@@ -26,7 +26,7 @@ Tweets were parsed and tokenized before using the model. All words were lowercas
 Presidential speechs were cleaned in a manner that matched the output of the tweet parser. That is, all punction marks were removed and sentences were marked with appropriate tags. The first two lines of each document was removed as it provided the name and date of each speech. A few speechs were transcripts of interviews, and thus had reporter questions that were not presidential text. Given that these interjections were infrequent and could not be easily removed with regular expressions, we decided to leave them in with the assumption that they would not change any bi-gram or tri-gram probabilities in a significant way.
 
 ### Fitting the Model
-The model we choose to implement is an $n$-gram model with $n = 2$. To deal with the issue of unseen counts, we use Good-Turing Smoothing, explained in more detail below. Bigram and Trigram counts are computed from the various training corpuses. We will use three different types of data to train the model in order to see if any type of data works best. They are as follows:
+The model we choose to implement is an $n$-gram model with $n = 2$. To deal with the issue of unseen counts, we use Good-Turing Smoothing, explained in more detail below. Bigram and snigram counts are computed from the various training corpuses. There were so many unseen trigrams that we found it best to limit our model to $n = 2$. We used three different types of data to train the model in order to see if any type of data works best. They are as follows:
 
 1. Text from presidential speech corpus.
 
@@ -92,7 +92,7 @@ The probilities of each of the following presidential quotes were computed using
 * Quote 9: \<s\> we must teach our children to resolve their conflicts with words not weapons \</s\> - Bill Clinton
 * Quote 10: \<s\> i would rather belong to a poor nation that was free than to a rich nation that had ceased to be in love with liberty \</s\> -Woodrow Wilson
 
-Probability outputs for each speaker on each of the ten quotes are shown below in Figure 1. Overall, the model correctly identified 2/10 (20%) of the people who said these tweets. The two speakers that the model identified correctly were Barack Obama (quote 1) and Donald Trump (quote 7). Given that our model attributed 7 quotes to either Trump or Obama, this may be the result of larger training corupuses for these two presidents. For earlier presidents, our corpus contains fewer speeches than for more recent presidents. We have 50 Obama speeches in our data set compared to only 21 for George Washinton. Using more data for recent presidents likely yields fewer unseen bigrams, and thus higher probabilities. The most likely quote-speaker pair was Donald Trump "Make America Great Again", nearly 1000 times more probable than Obama's famous "Yes we Can!" slogan.
+Probability outputs for each speaker on each of the ten quotes are shown below in Figure 1. Overall, the model correctly identified 2/10 (20%) of the people who said these tweets. The two speakers that the model identified correctly were Barack Obama (quote 1) and Donald Trump (quote 7). Given that our model attributed 7 quotes to either Trump or Obama, this may be the result of larger training corupuses for these two presidents. For earlier presidents, our corpus contains fewer speeches than for more recent presidents. We have 50 Obama speeches in our data set compared to only 21 for George Washinton. Using more data for recent presidents likely yields fewer unseen bigrams, and thus higher probabilities. The most likely quote-speaker pair was Donald Trump "Make America Great Again", nearly 1000 times more probable than Obama's famous "Yes We Can!" slogan.
 
 ![Presidential Quote Results](president_results.png)
 
@@ -134,7 +134,7 @@ Probability outputs for each speaker on each of the ten quotes are shown below i
 
 # Discussion
 
-Our results have shown that distinguising between speakers using tweets seems to be easier than using direct quotes from speechs. Both of these methods perform much better than using POS tags. These results suggest that people may have the tendency to be more formal/scripted in speeches than on twitter. Moreover, our results seem to indicate that while the types of words presidents use over time may change, the general distribution of part of speech tags since the founding of the United States has remained relatively constant. 
+Our results have shown that distinguising between speakers using tweets seems to be easier than using direct quotes from speechs. Both of these methods perform much better than using POS tags. These results suggest that politicians may have the tendency to be more formal/scripted in speeches than on twitter. Moreover, our results seem to indicate that while the types of words presidents use over time may change, the general distribution of part of speech tags since the founding of the United States has remained relatively constant. 
 
 Few (published) attempts have been made at speaker identification using $n$-gram models. (Japi, 2015) using a trigram distribution with Markov Chains to simulate novel text in the style of a given author. (Zheng, Li, Chen, and Huang, 2006) studied the problem of author attribution on English/Chinese online messaging data, and obtained a 70-95 % accuracy rate using advanced machine learning techniques like neural networks and support vector machines. In a monumental 1964 work, Mosteller and Wallace used Bayesian Inference to attribute 12 of the Federalist Papers to John Madison. 
 
@@ -144,8 +144,8 @@ The fact that our accuracy is relatively low is not surpirsing given the simplic
 # Works Cited
 - Gale, W. and G. Sampson. _Good Turing Estimation Without Tears_. Journal of Quantitative Linguistics, vol. 2, 217-237, 1995.
 - Japi, A. _Mimicking Writing Style With Markov Chains_. The Sopranos, Silicon Valley, and Summer Afternoons. [http://aakashjapi.com/mimicking-writing-style-with-markov-chains/](http://aakashjapi.com/mimicking-writing-style-with-markov-chains/)
-- Mosteller, F. and D. L. Wallace. _Inference and Disputed Authorship: The Federalist_. Reading, MA., 1964
--Zheng, R., Li, J., Chen, H. and Huang, Z. _A framework for authorship identification of online messages: Writing-style features and classification techniques_. J. Am. Soc. Inf. Sci., 57: 378–393, 2006.
+- Mosteller, F. and D. L. Wallace. _Inference and Disputed Authorship: The Federalist_. Reading, MA., 1964.
+- Zheng, R., Li, J., Chen, H. and Huang, Z. _A framework for authorship identification of online messages: Writing-style features and classification techniques_. J. Am. Soc. Inf. Sci., 57: 378–393, 2006.
 
 # Apendix
 Code for this project can be [found on GitHub](https://github.com/lbenz730/LING_227_Final_Project).
