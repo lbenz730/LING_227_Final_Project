@@ -37,7 +37,19 @@ The model we choose to implement is an $n$-gram model with $n = 2$ or $3$. To de
 Since the corpus of presidential speeches does not come with POS tags, we use a Hidden Markov Model to compute the most likely tag sequence for each sentence. The HMM is trained on data from the Brown Corpus built into Python's Natural Language Toolkit library. 
 
 ### Good Turing Smoothing
-WILL's SECTION HERE
+The smoothing method chosen for this project was the simple Good Turing smoothing method. This discounting algorthim uses the frequency of singletons words or N-grams to estimate the frequency of zero count events. The Good Turing algorthim first computes $N_c$ or the number of N-grams that occur c times: 
+
+$$
+N_c = \sum{x:count(x)=c} = 1
+$$
+
+The intuition behind the algorithm is then to use the number of N-grams that occur c times to determine the probability of N-grams which occur c+1 times. The updated counts denoted by $c*$ are calculated using the following formula:
+
+$$
+c* = (c+1) \frac{N_{c+1}}{N_c}
+$$
+
+These new counts $c*$ are then used to replace the maxium likelihood counts for each $N_c$. s
 
 
 ### Testing the Model
