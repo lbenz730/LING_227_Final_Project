@@ -23,6 +23,7 @@ import random
 from math import log
 from collections import defaultdict
 import numpy as np
+global obj
 
 class HMM:
   def __init__(self,train_data,test_data):
@@ -188,6 +189,7 @@ def isclose(a, b, rel_tol=1e-09, abs_tol=0.0):
     return abs(a-b) <= max(rel_tol * max(abs(a), abs(b)), abs_tol)
 
 def train_hmm():
+  global obj
   #devide corpus in train and test data
   tagged_sentences_Brown = brown.tagged_sents(categories= 'news')
   test_size = 1000
@@ -205,26 +207,26 @@ def train_hmm():
   obj = HMM(train_data_Universal,test_data_Universal)
   
   return obj
-def get_tags():
-  obj = train_hmm()
-  #train HMM
-  obj.train()
-  file = open(sys.argv[1]).readlines()
+def get_tags(sentence):
+  global obj
   #part B: test accuracy on test set
-  for sentence in file:
-    sentence = re.sub("<s> ", "", sentence)
-    sentence = re.sub("</s>", ".", sentence)
-    s = sentence.split(" ")
-    obj.initialize(s[0])
-    tags = obj.tag(s)
-    sent = "<s> " +  " ".join(tags) + " </s>"
-    sent = re.sub(r"\.", "<s> </s>", sent)
-    print " ".join(sent.split(" ")[:len(sent.split(" ")) - 3]) + " </s>"
+  sentence = re.sub("<s> ", "", sentence)
+  sentence = re.sub("</s>", ".", sentence)
+  s = sentence.split(" ")
+  obj.initialize(s[0])
+  tags = obj.tag(s)
+  sent = "<s> " +  " ".join(tags) + " </s>"
+  sent = re.sub(r"\.", "<s> </s>", sent)
+
+  if len(sent) > 2:
+    while sent.split(" ")[len(sent.split(" ")) - 2] ==  "</s>":
+      sent = " ".join(sent.split(" ")[:len(sent.split(" ")) - 2])
+  return sent
   
 
 if __name__ == '__main__':
   
-  get_tags()
+  get_tags(file)
 
 
 

@@ -34,13 +34,13 @@ The model we choose to implement is an $n$-gram model with $n = 2$. To deal with
 
 3. Tweet text from Obama, Trump and several U.S. senators. 
 
-Since the corpus of presidential speeches does not come with POS tags, we use a Hidden Markov Model to compute the most likely tag sequence for each sentence. The HMM is trained on data from the Brown Corpus built into Python's Natural Language Toolkit library. 
+Since the corpus of presidential speeches does not come with POS tags, we use a Hidden Markov Model to compute the most likely tag sequence for each sentence. The HMM is trained on data from the Brown Corpus built into Python's Natural Language Toolkit library.
 
 ### Good Turing Smoothing
 The smoothing method chosen for this project was the simple Good Turing smoothing method. This discounting algorthim uses the frequency of singletons words or N-grams to estimate the frequency of zero count events. The Good Turing algorthim first computes $N_c$ or the number of N-grams that occur c times: 
 
 $$
-N_c = \sum{x:count(x)=c} = 1
+N_c = \sum_{x}count(x) = c 
 $$
 
 The intuition behind the algorithm is then to use the number of N-grams that occur c times to determine the probability of N-grams which occur c+1 times. The updated counts denoted by $c*$ are calculated using the following formula:
@@ -60,14 +60,14 @@ In this equation, $N_1$ is the number of counts seen once and N is the total num
 An issue that arose when implementing this algorithm was that there were holes in the set of raw counts of counts $N_c$. Since the re-estimated value of a given $c*$ depends on $N_{c+1}$ these holes had to filled in with an estimation in order for the model to function. This was accomplished by using the Simple Good-Turing method proposed by (Gale and Sampson 1995). This method works by smoothing the unseen $N_c$ bins to replace all zeros. A linear regression function which maps the $N_c$ to c in log space was used for this smoothing:
 
 $$
-log(N_c) = a + blog(c)
+\log(N_c) = a + b\log(c)
 $$
 
 ### Testing the Model
 For each of the three types of training files, we have compiled a list of 10 quotes, each from a different speaker. The 10 possible speakers are then used as training files for the model. The probability of each quote for a given speaker is calculated as follows, using addition of logarithms to account for small probabilities.
 
 $$
-\mathbb{P}(Q) = \prod_{i = i}^{n} \mathbb{P}(w_i|w_{i-1}) = 2^{\sum_{i=1}^{n}\log_2(\mathbb{P}(w_i|w_{i-1})})
+\mathbb{P}(Q) = \prod_{i = i}^{n} \mathbb{P}(w_i|w_{i-1}) = 2^{\sum_{i=1}^{n}\log_2(\mathbb{P}(w_i|w_{i-1}))}
 $$
 
 After computing the probability of each sentence for all possibile speakers, we attribute to each quote the speaker that yields the highest probability for the given quote. That is, our model predicts the speaker $S$ of a quote $Q$ as follows:
@@ -92,23 +92,27 @@ The probilities of each of the following presidential quotes were computed using
 * Quote 9: \<s\> we must teach our children to resolve their conflicts with words not weapons \</s\> - Bill Clinton
 * Quote 10: \<s\> i would rather belong to a poor nation that was free than to a rich nation that had ceased to be in love with liberty \</s\> -Woodrow Wilson
 
-Probability outputs for each speaker on each of the ten quotes are shown below in Figure 1. Overall, the model correctly identified 2/10 (50%) of the people who said these tweets. The two speakers that the model identified correctly were Barack Obama (quote 1) and Donald Trump (quote 7). Given that our model attributed 7 quotes to either Trump or Obama, this may be the result of larger training corupuses for these two presidents. For earlier presidents, our corpus contains fewer speeches than for more recent presidents. We have 50 Obama speeches in our data set compared to only 21 for George Washinton. Using more data for recent presidents likely yields fewer unseen bigrams, and thus higher probabilities. The most likely quote-speaker pair was Donald Trump "Make America Great Again", nearly 1000 times more probable than Obama's famous "Yes we Can!" slogan.
+Probability outputs for each speaker on each of the ten quotes are shown below in Figure 1. Overall, the model correctly identified 2/10 (20%) of the people who said these tweets. The two speakers that the model identified correctly were Barack Obama (quote 1) and Donald Trump (quote 7). Given that our model attributed 7 quotes to either Trump or Obama, this may be the result of larger training corupuses for these two presidents. For earlier presidents, our corpus contains fewer speeches than for more recent presidents. We have 50 Obama speeches in our data set compared to only 21 for George Washinton. Using more data for recent presidents likely yields fewer unseen bigrams, and thus higher probabilities. The most likely quote-speaker pair was Donald Trump "Make America Great Again", nearly 1000 times more probable than Obama's famous "Yes we Can!" slogan.
 
 ![Presidential Quote Results](president_results.png)
 
 ## Part of Speech Tags
 The probilities of each of the following presidential quotes in POS tag form were computed using the relavent speakers speechs as training files for the bigram model.
 
-* Quote 1: <s> ADV PRON VERB </s> - Barack Obama
-* Quote 2: <s> CONJ ADV DET NOUN PRT VERB ADV DET DET NOUN VERB VERB ADP PRON VERB DET PRON VERB VERB ADP DET NOUN </s> - JFK
-* Quote 3: <s> ADV DET NOUN VERB PRON ADP NOUN ADP PRON VERB ADV ADJ </s> - Richard Nixon
-* Quote 4: <s> DET ADJ NOUN PRON VERB PRT VERB VERB VERB PRON </s> - FDR
-* Quote 5: <s> NOUN ADV PRON VERB PRT VERB PRT VERB DET NOUN ADP ADJ NOUN </s> - George Washington
-* Quote 6: <s> DET NOUN ADP ADJ NOUN CONJ NOUN CONJ ADV DET NOUN VERB DET ADJ CONJ ADJ NOUN ADP ADJ NOUN </s> - Thomas Jefferson
-* Quote 7: <s> VERB NOUN ADJ ADV </s> - Donald Trump
-* Quote 8: <s> DET NOUN VERB ADP PRON VERB NOUN </s> - Abe Lincoln
-* Quote 9: <s> PRON VERB VERB DET NOUN PRT VERB DET NOUN ADP NOUN ADV NOUN </s> - Bill Clinton
-* Quote 10 <s> PRON VERB ADV VERB ADP DET ADJ NOUN PRON VERB ADJ ADP ADP DET ADJ NOUN PRON VERB VERB PRT VERB ADP VERB ADP NOUN </s> - Woodrow Wilson
+* Quote 1: \<s\> ADV PRON VERB \</s\> - Barack Obama
+* Quote 2: \<s\> CONJ ADV DET NOUN PRT VERB ADV DET DET NOUN VERB VERB ADP PRON VERB DET PRON VERB VERB ADP DET NOUN \</s\> - JFK
+* Quote 3: \<s\> ADV DET NOUN VERB PRON ADP NOUN ADP PRON VERB ADV ADJ \</s\> - Richard Nixon
+* Quote 4: \<s\> DET ADJ NOUN PRON VERB PRT VERB VERB VERB PRON \</s\> - FDR
+* Quote 5: \<s\> NOUN ADV PRON VERB PRT VERB PRT VERB DET NOUN ADP ADJ NOUN \</s\> - George Washington
+* Quote 6: \<s\> DET NOUN ADP ADJ NOUN CONJ NOUN CONJ ADV DET NOUN VERB DET ADJ CONJ ADJ NOUN ADP ADJ NOUN \</s\> - Thomas Jefferson
+* Quote 7: \<s\> VERB NOUN ADJ ADV \</s\> - Donald Trump
+* Quote 8: \<s\> DET NOUN VERB ADP PRON VERB NOUN \</s\> - Abe Lincoln
+* Quote 9: \<s\> PRON VERB VERB DET NOUN PRT VERB DET NOUN ADP NOUN ADV NOUN \</s\> - Bill Clinton
+* Quote 10 \<s\> PRON VERB ADV VERB ADP DET ADJ NOUN PRON VERB ADJ ADP ADP DET ADJ NOUN PRON VERB VERB PRT VERB ADP VERB ADP NOUN \</s\> - Woodrow Wilson
+
+Probability outputs for each speaker on each of the ten POS tagged quotes are shown below in Figure 2. Overall, the model correctly identified 1/10 (10%) of the people who uttered the POS Tag sequences. Notice that the probabilities of each speaker-tag sequence pair are much larger than each speaker-quote pair. This is likely due to the fewer possible tags, and thus fewer unseen bigrams, as compared to training with words. Our model attributed every single POS tag to Donal Trump. Since there was little variation on each quote and Trump has the most speeches in our corpus, this could be due to Trump having fewer unseen bigrams. In any case, there seems to be very little overall discrenability between speakers on the basis of POS tags.
+
+![POS Tags Results](postags.png)
 
 ## Tweet Data
 The probilities of each of the following tweets were computed using the relavent speakers' twitter history as training files for the bigram model.
@@ -118,7 +122,7 @@ The probilities of each of the following tweets were computed using the relavent
 * Quote 3 \<s\> stark reminder of the threat radical islamic terror still poses to our homeland \</s\> -Ted Cruz
 * Quote 4: \<s\> it's not by giving massive tax breaks to your billionaire friends \</s\> - Bernie Sanders
 * Quote 5: \<s\> tax bill equals swamp creature \</s\> - Tim Kaine
-* Quote 6: \<s\> @SenBernieSanders & I are talking about things democrats are fighting for in this spending bill that would make a big difference to working families \</s\> - Elizabeth Warren
+* Quote 6: \<s\> \@SenBernieSanders & I are talking about things democrats are fighting for in this spending bill that would make a big difference to working families \</s\> - Elizabeth Warren
 * Quote 7: \<s\> whether you are in the media politics or anywhere else abuse of power is unacceptable & shouldn’t be tolerated at any place at any level \</s\> - Lisa Murkowski
 * Quote 8: \<s\> in a foreign relations committee hearing today i discussed how u.S. nuclear forces protect our nation and allies in the 21st century \</s\> - Marco Rubio
 * Quote 9: \<s\> president trump did the people of utah a great favor today by rolling back harmful land use restrictions in southern utah \#utpol  \</s\> - Mike Lee
@@ -128,9 +132,19 @@ Probability outputs for each speaker on each of the ten quotes are shown below i
 
 ![Tweet Results](tweet_results.png)
 
-
-
-
-
-
 # Discussion
+
+Our results have shown that distinguising between speakers using tweets seems to be easier than using direct quotes from speechs. Both of these methods perform much better than using POS tags. These results suggest that people may have the tendency to be more formal/scripted in speeches than on twitter. Moreover, our results seem to indicate that while the types of words presidents use over time may change, the general distribution of part of speech tags since the founding of the United States has remained relatively constant. 
+
+Few (published) attempts have been made at speaker identification using $n$-gram models. (Japi, 2015) using a trigram distribution with Markov Chains to simulate novel text in the style of a given author. (Zheng, Li, Chen, and Huang, 2006) studied the problem of author attribution on English/Chinese online messaging data, and obtained a 70-95 % accuracy rate using advanced machine learning techniques like neural networks and support vector machines. In a monumental 1964 work, Mosteller and Wallace used Bayesian Inference to attribute 12 of the Federalist Papers to John Madison. 
+
+The fact that our accuracy is relatively low is not surpirsing given the simplicity of the bigram model. Certain machine learning classification algorithms that have been developed in recent years are likely to outperform our basic counting method. Still, there are a few ways we could improve our methodology to obtain better accuracy. The easiest way to improve accuracy would be to obtain more data, especially for earlier presidents. This would lead to fewer unseen bigrams, and would place all potential speakers on a level playing field. Additionally, with more data, we could attempt to expand our model to a trigram model. Having so many unseen counts made trigram modeling impossible for this task, but perhaps with enough data, using trigrams would be more powerful. Another extension for future work would be to examine other types of smoothing. We choose to use Good Turing smoothing in this model, but perhaps add-$\lambda$ smoothing or Katz's Backoff may perform better. Overall, are results are about was to be expected given the limits of an $n$-gram language model.
+
+
+# Works Cited
+- Gale, W. and G. Sampson. _Good Turing Estimation Without Tears_. Journal of Quantitative Linguistics, vol. 2, 217-237, 1995.
+- Japi, A. _Mimicking Writing Style With Markov Chains_. The Sopranos, Silicon Valley, and Summer Afternoons. [http://aakashjapi.com/mimicking-writing-style-with-markov-chains/](http://aakashjapi.com/mimicking-writing-style-with-markov-chains/)
+- Mosteller, F. and D. L. Wallace. _Inference and Disputed Authorship: The Federalist_. Reading, MA., 1964
+-Zheng, R., Li, J., Chen, H. and Huang, Z. _A framework for authorship identification of online messages: Writing-style features and classification techniques_. J. Am. Soc. Inf. Sci., 57: 378–393, 2006.
+
+

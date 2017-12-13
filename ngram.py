@@ -8,11 +8,13 @@ from scipy import linalg
 from good_turing import good_turing_counts
 from tweet_parse import tweet_parse, clean_tweet
 from tok import *
+from hmm import *
 
 # boolean variable for good-turing smoothing:
 good_turing = False
 tweet = False
 speech = False
+hmm = False
 
 global counts
 global bi_counts
@@ -24,6 +26,9 @@ global new_counts
 global new_bicounts
 global new_bitricounts
 global new_tricounts
+
+### For HMM
+global obj
 
 
 # set up dictionaries
@@ -48,6 +53,7 @@ def train_data():
 	global new_bicounts
 	global new_bitricounts
 	global new_tricounts
+	global obj
 
 	if ngram == 2:
 		if tweet:
@@ -71,6 +77,25 @@ def train_data():
  					counts[item[i]] += 1
  					bi_counts[item[i]][item[i+1]] += 1
  				counts[item[len(item)-1]] += 1
+
+
+
+ 		if hmm:
+ 			obj = train_hmm()
+ 			obj.train()
+ 			speeches = parse(training_file)
+ 			k = len(speeches)
+ 			j = 1
+ 			for item in speeches:
+ 				print "Tagging Sentence", j, "of", k
+ 				j += 1
+ 				### Get Tags from HMM
+ 				tags = get_tags(" ".join(item), )
+ 				for i in range(len(tags)-1):
+ 					counts[tags[i]] += 1
+ 					bi_counts[tags[i]][tags[i+1]] += 1
+ 				counts[tags[len(tags)-1]] += 1
+
 
 
 		# implement good turning 
@@ -203,6 +228,9 @@ if '-good_turing' in sys.argv:
 	if '-speech' in sys.argv:
 		speech = True
 		sys.argv.remove('-speech')
+	if '-hmm' in sys.argv:
+		hmm = True
+		sys.argv.remove('-hmm')
 
 training_file = sys.argv[1]
 ngram = int(sys.argv[2])

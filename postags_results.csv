@@ -1,11 +1,15 @@
 speaker,quote_1,quote_2,quote_3,quote_4,quote_5,quote_6,quote_7,quote_8,quote_9,quote_10
-Barack Obama,,,,,,,,,,
-JFK,,,,,,,,,,
-Richard Nixon,,,,,,,,,,
-FDR,,,,,,,,,,
-George Washington,,,,,,,,,,
-Thomas Jefferson,,,,,,,,,,
-Donald Trump,,,,,,,,,,
-Abe Lincoln,,,,,,,,,,
-Bill Clinton,,,,,,,,,,
-Woodrow Wilson,,,,,,,,,,
+Barack Obama,1.58E-05,2.50E-28,2.50E-16,6.29E-14,1.58E-17,6.27E-26,9.99E-07,2.51E-10,1.58E-17,6.26E-32
+JFK,5.61E-06,6.41E-31,8.60E-18,3.63E-15,4.18E-19,2.71E-28,2.73E-07,3.15E-11,4.18E-19,7.39E-35
+Richard Nixon,9.15E-06,1.07E-29,4.21E-17,1.39E-14,2.32E-18,3.53E-27,5.03E-07,8.37E-11,2.32E-18,1.77E-33
+FDR,1.33E-05,9.33E-29,1.44E-16,3.93E-14,8.67E-18,2.55E-26,8.06E-07,1.78E-10,8.67E-18,2.06E-32
+George Washington,4.58E-06,2.01E-31,4.46E-18,2.08E-15,2.06E-19,9.37E-29,2.12E-07,2.10E-11,2.06E-19,1.99E-35
+Thomas Jefferson,2.28E-06,3.66E-33,4.64E-19,3.07E-16,1.80E-20,2.42E-30,8.88E-08,5.22E-12,1.80E-20,2.15E-37
+Donald Trump,4.29E-05,7.74E-26,6.41E-15,9.78E-13,5.19E-16,1.18E-23,3.48E-06,1.84E-09,5.19E-16,4.10E-29
+Abe Lincoln,6.68E-06,1.75E-30,1.51E-17,5.86E-15,7.70E-19,6.76E-28,3.40E-07,4.46E-11,7.70E-19,2.29E-34
+Bill Clinton,2.04E-05,1.06E-27,5.67E-16,1.26E-13,3.81E-17,2.35E-25,1.37E-06,4.15E-10,3.81E-17,3.22E-31
+Woodrow Wilson,5.97E-06,9.12E-31,1.05E-17,4.29E-15,5.18E-19,3.73E-28,2.95E-07,3.56E-11,5.18E-19,1.10E-34
+,,,,,,,,,,
+Key,Probilities in each column are sorted from largest (green) to smallest (red),,,,,,,,,
+Correctly Identified,,,,,,,,,,
+Incorrectly Identified,,,,,,,,,,
