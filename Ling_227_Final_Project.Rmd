@@ -49,8 +49,19 @@ $$
 c* = (c+1) \frac{N_{c+1}}{N_c}
 $$
 
-These new counts $c*$ are then used to replace the maxium likelihood counts for each $N_c$. s
+These new counts $c*$ are then used to replace the maxium likelihood counts for each $N_c$. The probability of a zero-count event according the Good Turing algorithm is calculated using the following equation:
 
+$$
+P(N-gram with zero-count) = \frac{N_1}{N}
+$$
+
+In this equation, $N_1$ is the number of counts seen once and N is the total number of counts seen in the training set of the model. 
+
+An issue that arose when implementing this algorithm was that there were holes in the set of raw counts of counts $N_c$. Since the re-estimated value of a given $c*$ depends on $N_{c+1}$ these holes had to filled in with an estimation in order for the model to function. This was accomplished by using the Simple Good-Turing method proposed by (Gale and Sampson 1995). This method works by smoothing the unseen $N_c$ bins to replace all zeros. A linear regression function which maps the $N_c$ to c in log space was used for this smoothing:
+
+$$
+log(N_c) = a + blog(c)
+$$
 
 ### Testing the Model
 For each of the three types of training files, we have compiled a list of 10 quotes, each from a different speaker. The 10 possible speakers are then used as training files for the model. The probability of each quote for a given speaker is calculated as follows, using addition of logarithms to account for small probabilities.
