@@ -2,15 +2,15 @@ import numpy as np
 from collections import defaultdict
 
 # returns a dictionary mapping counts to new counts which have been smoothed using simple good turing
-def good_turing_counts(sorted_counts, unseen):
+def good_turing_counts(sorted_counts):
 	# get counts of counts with zero for unseen counts
 	count_of_counts = defaultdict(lambda:0)
 
 	# get count of counts with just seen counts
 	seen_counts = defaultdict(lambda:0)
 
-	# number of unseen events = number of words in grammar. There are approximately 1,022,000 words in the english language according to: http://www.telegraph.co.uk/technology/internet/8207621/English-language-has-doubled-in-size-in-the-last-century.html
-	n_0 = unseen - len(sorted_counts)
+	# number of unseen events = number of words in grammar.
+	n_0 = len(sorted_counts)
 
 	# set the number of unseen counts and bigrams
 	count_of_counts[0] = n_0
