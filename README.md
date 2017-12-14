@@ -32,7 +32,7 @@ python ngram.py -good_turing -speech DIR 2 presidential_quotes.txt
 To use the Hidden Markov Model on the tweets/speeches:
 
 ```
-python hmm.py FILE
+python python ngram.py -good_turing -hmm DIR 2 postags_quotes.txt
 ```
 
 ## Results
