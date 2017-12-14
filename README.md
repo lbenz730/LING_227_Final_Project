@@ -20,7 +20,7 @@ To smooth bigram model with good turing smooth, look at good_turing.py. It appli
 To train model and find probabilities of sentences using tweets:
 
 ```
-python ngram.py -good_turing -tweet TWEET.txt 2 tweet_quotes.txt
+python ngram.py -good_turing -tweet twitter/TWEET.txt 2 tweet_quotes.txt
 ```
 
 To train model and find probabilities of sentences using speeches:
