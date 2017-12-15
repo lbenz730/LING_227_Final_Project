@@ -52,7 +52,7 @@ $$
 These new counts $c*$ are then used to replace the maxium likelihood counts for each $N_c$. The probability of a zero-count event according the Good Turing algorithm is calculated using the following equation:
 
 $$
-P($$N-gram with zero-count$$) = \frac{N_1}{N}
+P(N-gram with zero-count) = \frac{N_1}{N}
 $$
 
 In this equation, $N_1$ is the number of counts seen once and N is the total number of counts seen in the training set of the model. 
